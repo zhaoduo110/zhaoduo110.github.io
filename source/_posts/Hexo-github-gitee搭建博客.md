@@ -1,0 +1,306 @@
+---
+title: Hexo+github+gitee搭建博客
+date: 2020-05-26 00:45:44
+tags:
+---
+
+
+
+## 准备及环境介绍
+
+- win10
+- node环境
+    - npm
+- git
+- Github
+    - 默认有Github账号并且有一定基础使用Git和Github
+    - 默认ssh配置完成或者使用Http方式
+
+-   Gitee
+    -   默认有Gitee账号并有一定使用经验
+    -   默认ssh配置完成或者使用Http方式
+
+
+
+
+
+---
+
+
+
+
+
+## Github和Gitee准备仓库
+
+### Github
+
+#### 新建仓库
+
+<img src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200525223755.png" alt="Github新建仓库"/>
+
+
+
+<img src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200525224055.png" alt="GitHub新建仓库-Pages"/>
+
+#### 设置仓库进行测试
+
+创建完成后到仓库界面执行以下操作
+
+##### 新建一个html文件
+
+![Github新建文件](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200525225338.png)
+
+![Github新建文件](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200525225505.png)
+
+
+
+##### 设置Pages主题
+
+![GitHub设置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200525225719.png)
+
+选择主题，如果需要绑定自定义域名的话也可以设置
+
+![Github设置Pages主题](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200525225812.png)
+
+然后访问 https://zhaoduo110.github.io/ 即可看到效果说明配置成功
+
+
+
+### Gitee
+
+#### 新建仓库
+
+![Gitee新建仓库](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200525230355.png)
+
+
+
+![Gitee创建博客仓库](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200526142828.png)
+
+
+
+#### 设置Gitee Pages
+
+![GiteePages](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200526143014.png)
+
+![GiteePages启动](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200526143114.png)
+
+
+
+上步启动后当前页面会更新为如下图所示：
+
+![GiteePages](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20200526143226.png)
+
+
+
+
+
+---
+
+
+
+
+
+## 安装Hexo部署博客
+
+### 本地安装
+
+```
+npm install -g hexo-cli
+```
+
+执行。blog为项目目录
+
+```
+hexo init blog
+cd blog
+npm install
+```
+
+执行完后的目录结构如下
+
+```
+.
+├── node_modules
+├── scaffolds
+├── source
+|   └── _posts
+└── themes
+├── _config.yml
+├── package.json
+
+```
+
+| 文件目录     | 文件目录 | 作用                                                         |
+| ------------ | -------- | ------------------------------------------------------------ |
+| node_modules |          |                                                              |
+| scaffolds    |          | 模板文件夹。当新建文章时，Hexo 会根据 scaffold 来建立文件    |
+| source       |          | 资源文件夹，除  _posts 文件，其他以下划线_开头的文件或者文件夹不会被编译打包到public文件夹 |
+|              | _drafts  | 默认不生成，草稿文件                                         |
+|              | _posts   | 文章Markdowm文件                                             |
+| themes       |          | 主题文件夹                                                   |
+| _config.yml  |          | 网站的 [配置](https://hexo.io/zh-cn/docs/configuration) 信息，可以在此配置大部分的参数 |
+| package.json |          | 应用程序的信息。[EJS](https://ejs.co/), [Stylus](http://learnboost.github.io/stylus/) 和 [Markdown](http://daringfireball.net/projects/markdown/) renderer 已默认安装，可以自由移除 |
+
+执行以下代码即可在本地浏览器访问 http://localhost:4000 预览效果。hexo会在本地起一个web服务
+
+```
+hexo s
+```
+
+
+
+### 关联仓库
+
+打开_config.yml，最下面进行修改
+
+```
+deploy:
+  type: git
+  repo: 
+       github: git@github.com:zhaoduo110/zhaoduo110.github.io.git
+       gitee: git@gitee.com:zhaoduo110/blog.git
+  branch: master
+```
+
+可以分别设置仓库和分支
+
+```
+deploy:
+  type: git
+  repo:
+    github: git@github.com:zhaoduo110/zhaoduo110.github.io.git,master
+    gitee: git@gitee.com:zhaoduo110/blog.git,master
+```
+
+
+
+### 推送Pages
+
+安装插件
+
+```
+npm install hexo-deployer-git --save
+```
+
+推送
+
+```
+hexo deploy
+```
+
+`注意`：Gitee是需要重新部署的
+
+
+
+### 用仓库的不同分支来管理源文件
+
+#### 1. 本地blog目录别名为blog_bak
+
+#### 2. 新建blog目录并进入该目录
+
+初始化本地仓库
+
+```
+git init
+```
+
+关联远程仓库(Github)
+
+```
+git remote add origin git@github.com:zhaoduo110/zhaoduo110.github.io.git
+git remote set-url --add origin git@gitee.com:zhaoduo110/blog.git
+```
+
+#### 3. 把原blog_bak下所有文件复制到blog目录
+
+```
+git add
+git commit -m '初始化源文件'
+```
+
+创建分支并推送远程
+
+```
+git branch source
+git push --set-upstream origin source
+```
+
+
+
+#### 4. 其他机器配置
+
+首先从仓库中克隆
+
+```
+git clone -b source git@github.com:zhaoduo110/zhaoduo110.github.io.git
+git remote set-url --add origin git@gitee.com:zhaoduo110/blog.git
+```
+
+然后初始化
+
+```
+cd blog
+npm install
+```
+
+
+
+```
+hexo clean
+hexo g
+dexo d
+```
+
+
+
+
+
+### 设置主题
+
+主题网站：https://hexo.io/themes/
+
+以Butterfly主题为例
+
+官网：https://docs.jerryc.me/#/
+
+#### 安装
+
+如果沒有 pug 以及 stylus 的渲染器，请执行以下命令进行下载安装：
+
+```
+npm install hexo-renderer-pug hexo-renderer-stylus --save
+# 或者
+yarn add hexo-renderer-pug hexo-renderer-stylus
+```
+
+博客根目录下执行
+
+```
+git clone -b master https://github.com/jerryc127/hexo-theme-butterfly.git themes/Butterfly
+```
+
+安装比较新的dev分支
+
+```
+git clone -b dev https://github.com/jerryc127/hexo-theme-butterfly.git themes/Butterfly
+```
+
+#### 应用主题
+
+修改 _config.yml
+
+```
+theme: Butterfly
+```
+
+#### 平滑升级
+
+推荐把默认的主题配置文件`_config.yml`复制到 Hexo 工作目录下的`source/_data/butterfly.yml`，如果`source/_data`的目录不存在就创建一个。
+
+如果创建了`butterfly.yml`, 它将会替换主题默认配置文件`_config.yml`里的配置项 (**不是合并而是替换**), 之后你只需要通过`git pull`的方式就可以平滑地升级 `theme-butterfly`了
+
+#### 主题配置
+
+配置：https://docs.jerryc.me/#/config/theme-config
+
+页面：https://docs.jerryc.me/#/config/theme-page
