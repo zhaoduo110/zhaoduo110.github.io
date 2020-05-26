@@ -158,7 +158,7 @@ deploy:
   type: git
   repo: 
        github: git@github.com:zhaoduo110/zhaoduo110.github.io.git
-       gitee: git@gitee.com:zhaoduo110/blog.git
+       gitee: git@gitee.com:zhaoduo110/zhaoduo110.git
   branch: master
 ```
 
@@ -169,7 +169,7 @@ deploy:
   type: git
   repo:
     github: git@github.com:zhaoduo110/zhaoduo110.github.io.git,master
-    gitee: git@gitee.com:zhaoduo110/blog.git,master
+    gitee: git@gitee.com:zhaoduo110/zhaoduo110.git,master
 ```
 
 
@@ -188,7 +188,7 @@ npm install hexo-deployer-git --save
 hexo deploy
 ```
 
-`注意`：Gitee是需要重新部署的
+`注意`：推送后Gitee是需要在pages服务中重新部署的，否则不生效
 
 
 
@@ -208,7 +208,7 @@ git init
 
 ```
 git remote add origin git@github.com:zhaoduo110/zhaoduo110.github.io.git
-git remote set-url --add origin git@gitee.com:zhaoduo110/blog.git
+git remote set-url --add origin git@gitee.com:zhaoduo110/zhaoduo110.git
 ```
 
 #### 3. 把原blog_bak下所有文件复制到blog目录
@@ -229,21 +229,67 @@ git push --set-upstream origin source
 
 #### 4. 其他机器配置
 
-首先从仓库中克隆
+首先从github仓库中克隆博客源文件
 
 ```
 git clone -b source git@github.com:zhaoduo110/zhaoduo110.github.io.git
-git remote set-url --add origin git@gitee.com:zhaoduo110/blog.git
+```
+
+如果需要修改博客目录名的话可以进行修改。此处我的修改为blog
+
+```
+cd blog
+```
+
+关联Gitee仓库
+
+```
+git remote set-url --add origin git@gitee.com:zhaoduo110/zhaoduo110.git
 ```
 
 然后初始化
 
 ```
-cd blog
 npm install
 ```
 
 
+
+### Hexo的简单操作
+
+#### 常用命令
+
+待完善：https://hexo.io/zh-cn/docs/commands
+
+**命令：**
+
+hexo new [layout] <title>
+
+**作用：**
+
+新建一篇文章。如果没有设置 `layout` 的话，默认使用 [_config.yml](https://hexo.io/zh-cn/docs/configuration) 中的 `default_layout` 参数代替。如果标题包含空格的话，请使用引号括起来
+
+**参数：**
+
+| 参数          | 作用                                          |
+| ------------- | --------------------------------------------- |
+| -p，--path    | 自定义新文章的路径                            |
+| -r，--replace | 如果存在同名文章，将其替换                    |
+| -s，--slug    | 文章的 Slug，作为新文章的文件名和发布后的 URL |
+
+**举例：**
+
+```
+hexo new "post title with whitespace"
+hexo new page --path about/me "About me"
+hexo new page --path about/me
+```
+
+
+
+#### 常用操作
+
+重新生成静态文件并部署
 
 ```
 hexo clean

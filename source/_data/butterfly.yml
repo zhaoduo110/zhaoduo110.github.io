@@ -7,13 +7,13 @@
 menu:
   主页: / || fa fa-home
   文章: /archives/ || fa fa-archive
-  标签: /tags/ || fa fa-tags
-  分类: /categories/ || fa fa-folder-open
-  友链: /link/ || fa fa-link
-  关于: /about/ || fa fa-heart
-  更多||fa fa-list:
-    - 音乐 || /music/ || fa fa-music
-    - 电影 || /movies/ || fa fa-film
+#   标签: /tags/ || fa fa-tags
+#   分类: /categories/ || fa fa-folder-open
+#   友链: /link/ || fa fa-link
+#   关于: /about/ || fa fa-heart
+#   更多||fa fa-list:
+#     - 音乐 || /music/ || fa fa-music
+#     - 电影 || /movies/ || fa fa-film
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
