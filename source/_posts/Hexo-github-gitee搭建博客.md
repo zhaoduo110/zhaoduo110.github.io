@@ -350,3 +350,74 @@ theme: Butterfly
 配置：https://docs.jerryc.me/#/config/theme-config
 
 页面：https://docs.jerryc.me/#/config/theme-page
+
+
+
+
+
+### 添加标签和分类页面
+
+分类
+
+```
+hexo new page categories
+```
+
+标签
+
+```
+hexo new page tags
+```
+
+主题文件配置
+
+```
+menu:
+  主页: / || fa fa-home
+  文章: /archives/ || fa fa-archive
+  标签: /tags/ || fa fa-tags
+  分类: /categories/ || fa fa-folder-open
+```
+
+在文章中设置分类和标签
+
+https://hexo.io/zh-cn/docs/front-matter
+
+```
+---
+title: Hello World
+date: 2013/7/13 20:46:25
+categories:
+- Diary
+tags:
+- PS3
+- Games
+---
+```
+
+设置完后一般进入到标签和分类页面是不显示标签和分类的，要声明分类和标签页面的类型
+
+修改 `source\categories` 
+
+```
+title: categories
+date: 2020-05-28 11:17:02
+type: "categories"
+```
+
+同理修改 `source\tags`
+
+```
+title: tags
+date: 2020-05-28 11:17:14
+type: "tags"
+```
+
+
+
+
+
+
+
+
+

@@ -10,25 +10,25 @@ tags:
 
 
 
-## 单例模式
+# 单例模式
 
-#### 作用：
+### 作用：
 
 在应用程序调用的时候，只能获得一个对象实例
 
-#### 使用场景：
+### 使用场景：
 
 一般用于各种连接(比如数据库)，防止创建过多连接对该服务造成压力等场景
 
 
 
-#### UML图：
+### UML图：
 
 ![UML-singleton](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/UML-singleton.png)
 
 
 
-#### 步骤：
+### 步骤：
 
 - 第一步：私有化静态变量存放对象实例
 - 第二步：私有构造方法，禁止外部实例化对象
@@ -38,11 +38,11 @@ tags:
 
 
 
-#### Demo：
+### Demo：
 
 Github实例代码：
 
-##### 实现
+#### 实现
 
 DB.php
 
@@ -105,7 +105,7 @@ class DB2 extends DB
 
 
 
-##### 测试
+#### 测试
 
 TestSingleton.php
 

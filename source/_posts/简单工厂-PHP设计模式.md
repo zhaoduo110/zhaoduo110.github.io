@@ -6,32 +6,34 @@ categories:
 tags:
 - PHP
 - 设计模式
+thumbnail:
+
 ---
 
 
 
 
 
-### 简单工厂模式
+# 简单工厂模式
 
 由一个工厂对象决定创建出哪一种产品类的实例
 
 
 
-#### 作用：
+### 作用：
 
 简单工厂的作用是实例化对象，而不需要客户了解这个对象属于哪个具体的子类
 
 
 
-#### 使用场景：
+### 使用场景：
 
 - 在子类比较固定并不需要扩展时
 - 工厂类负责创建的对象比较少
 
 
 
-#### 3个对象
+### 3个对象
 
 - 抽象产品类（Vehicle\Vehicle.php）：提供抽象方法供具体产品类实现
 - 具体产品类（Vehicle\Car.php、Vehicle\Bicycle.php）：提供具体的产品
@@ -39,17 +41,17 @@ tags:
 
 
 
-#### UML图：
+### UML图：
 
 ![UML-Simple-Factory](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/UML-Simple-Factory.png)
 
 
 
-#### Demo
+### Demo
 
 Github地址：
 
-##### 实现
+#### 实现
 
 Vehicle\Bicycle.php
 
@@ -135,7 +137,7 @@ class Factory
 
 
 
-##### 测试
+#### 测试
 
 TestSimpleFactory.php
 
