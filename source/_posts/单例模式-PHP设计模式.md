@@ -1,11 +1,14 @@
 ---
-title: '单例模式-PHP设计模式'
-date: 2020-05-27 16:28:39
+title: 单例模式-PHP设计模式
 categories:
-- [PHP]
+  - - PHP
 tags:
-- PHP
-- 设计模式
+  - PHP
+  - 设计模式
+abbrlink: d17eac8a
+date: 2020-05-27 16:28:39
+top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5991569950166.jpg
+cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5991569950166.jpg
 ---
 
 

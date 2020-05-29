@@ -1,11 +1,14 @@
 ---
-title: '多例模式-php设计模式'
-date: 2020-05-27 16:50:40
+title: 多例模式-php设计模式
 categories:
-- [PHP]
+  - - PHP
 tags:
-- PHP
-- 设计模式
+  - PHP
+  - 设计模式
+abbrlink: baac6cc2
+date: 2020-05-27 16:50:40
+top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/timg1.jpg
+cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/timg1.jpg
 ---
 
 

@@ -1,11 +1,14 @@
 ---
 title: PHP设计模式介绍
-date: 2020-05-27 16:54:33
 categories:
-- [PHP]
+  - - PHP
 tags:
-- PHP
-- 设计模式
+  - PHP
+  - 设计模式
+abbrlink: 4beef62a
+date: 2020-05-27 16:54:33
+top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsR1.jpg
+cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsR1.jpg
 ---
 
 

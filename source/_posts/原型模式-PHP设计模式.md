@@ -1,11 +1,14 @@
 ---
 title: 原型模式-PHP设计模式
-date: 2020-05-27 16:55:47
 categories:
-- [PHP]
+  - - PHP
 tags:
-- PHP
-- 设计模式
+  - PHP
+  - 设计模式
+abbrlink: 79d489ee
+date: 2020-05-27 16:55:47
+top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg
+cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg
 ---
 
 

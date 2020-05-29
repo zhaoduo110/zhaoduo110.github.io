@@ -1,7 +1,10 @@
 ---
 title: Hexo+github+gitee搭建博客
+abbrlink: bad90aa0
 date: 2020-05-26 00:45:44
-tags:
+top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5a27d7aa3c85b.jpg
+cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5a27d7aa3c85b.jpg
+tags: 
 ---
 
 
@@ -414,6 +417,27 @@ type: "tags"
 ```
 
 
+
+### 修改永久链接
+
+Hexo的永久链接的默认格式是 `:year/:month/:day/:title/`。这种默认配置的缺点就是一般文件名是中文，导致url链接里有中文出现，这会造成很多问题，如使用gitment，也不利于seo。另外就是年月日都会有分隔符。解决这种问题需要安装 `hexo-abbrlink` 插件
+
+#### 安装插件
+
+```
+npm install hexo-abbrlink --save
+```
+
+#### 修改默认配置。_config.yml，找到 `permalink`
+
+```
+# permalink: :year/:month/:day/:title/
+# permalink_defaults:
+permalink: posts/:abbrlink.html
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
+```
 
 
 

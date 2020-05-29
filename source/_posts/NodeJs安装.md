@@ -1,11 +1,14 @@
 ---
 title: NodeJs安装
-date: 2020-05-27 16:28:39
 categories:
-- [前端]
+  - - 前端
 tags:
-- [前端]
-- [NodeJs]
+  - - 前端
+  - - NodeJs
+abbrlink: 6c48ffe7
+date: 2020-05-27 16:28:39
+top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg
+cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg
 ---
 
 ## node、npm、cnpm、nvm

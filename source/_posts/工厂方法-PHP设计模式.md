@@ -1,11 +1,14 @@
 ---
 title: 工厂方法-PHP设计模式
-date: 2020-05-27 17:01:10
 categories:
-- [PHP]
+  - - PHP
 tags:
-- PHP
-- 设计模式
+  - PHP
+  - 设计模式
+abbrlink: b4a8c0f9
+date: 2020-05-27 17:01:10
+top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/U10131P115DT20150107140651.jpg
+cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/U10131P115DT20150107140651.jpg
 ---
 
 
