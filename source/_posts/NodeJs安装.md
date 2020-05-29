@@ -1,5 +1,11 @@
 ---
 title: NodeJs安装
+date: 2020-05-27 16:28:39
+categories:
+- [前端]
+tags:
+- [前端]
+- [NodeJs]
 ---
 
 ## node、npm、cnpm、nvm
