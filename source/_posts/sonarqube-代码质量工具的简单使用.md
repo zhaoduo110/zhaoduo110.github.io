@@ -1,18 +1,6 @@
 ---
-title: sonarqube_代码质量工具的简单使用
-top_img: >-
-  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/t01217e752424303b18.jpg
-cover: >-
-  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/t01217e752424303b18.jpg
-abbrlink: d9d1ff79
-date: 2020-07-02 14:44:13
-tags:
+abbrlink: 68d7117c
 ---
-
-
-
-
-
 # 安装
 
 
@@ -44,6 +32,8 @@ tags:
 
 
 ## 扫描分析
+
+### Demo
 
 ![代码质量工具sonarqube项目分析](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/代码质量工具sonarqube项目分析.png)
 
@@ -88,6 +78,16 @@ tags:
 5. 扫描完成后即可在管理界面对应的项目中看到结果
 
 
+
+### sonar-scanner扫描命令的配置
+
+| 配置项     | 作用                                                     | 取值           |
+| ---------- | -------------------------------------------------------- | -------------- |
+| projectKey | 项目名称                                                 |                |
+| sources    | 要扫描的目录                                             |                |
+| host.url   | sonar服务器ip或者域名                                    | http://ip:port |
+| login      | 管理后台设置的令牌                                       |                |
+| exclusions | 要排除的目录或者文件，不需要扫描的。<br>测试无效，未解决 | vendor         |
 
 
 
