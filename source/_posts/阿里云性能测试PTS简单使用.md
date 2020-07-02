@@ -1,7 +1,10 @@
 ---
 title: 阿里云性能测试PTS简单使用
+abbrlink: b9dafd7e
 date: 2020-07-01 15:40:46
-tags:
+top_img: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/5a4dbec0c6bbc.jpg
+cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/5a4dbec0c6bbc.jpg
+tags: 测试
 ---
 
 
