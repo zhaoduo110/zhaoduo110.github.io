@@ -25,8 +25,6 @@ tags:
 
 ## 项目配置
 
-### 项目配置
-
 #### 新建项目
 
 ![代码质量工具sonarqube新建项目](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/代码质量工具sonarqube新建项目.png)
