@@ -45,11 +45,11 @@ PTS控制台 --> 创建压测 --> 创建PTS场景
 
 1. 输入压测的URL，请求方式，超时时间，是否允许302跳转
 
-![阿里云性能测试 PTS-创建压测基本信息](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试 PTS-创建压测基本信息.png)
+![阿里云性能测试 PTS-创建压测基本信息](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试PTS-创建压测基本信息.png)
 
 **定义请求头和请求内容**
 
-![阿里云性能测试 PTS-创建压测请求内容](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试 PTS-创建压测请求内容.png)
+![阿里云性能测试 PTS-创建压测请求内容](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试PTS-创建压测请求内容.png)
 
 **定义出参**
 
@@ -65,7 +65,7 @@ PTS控制台 --> 创建压测 --> 创建PTS场景
 
 基本设置，最大并发，压测总时长，选择要压测的链路，设置链路最大并发权重等
 
-![阿里云性能测试 PTS-创建压测施压配置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试 PTS-创建压测施压配置.png)
+![阿里云性能测试 PTS-创建压测施压配置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试PTS-创建压测施压配置.png)
 
 
 
@@ -95,13 +95,13 @@ PTS控制台 --> 创建压测 --> 创建PTS场景
 2. 上传jmx文件，如果有其他的jar包或者数据文件也需要上传
 3. 选择Jmeter版本
 
-![阿里云性能测试 PTS-创建压测-JMeter压测场景配置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试 PTS-创建压测-JMeter压测场景配置.png)
+![阿里云性能测试 PTS-创建压测-JMeter压测场景配置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试PTS-创建压测-JMeter压测场景配置.png)
 
 
 
 #### 施压配置
 
-![阿里云性能测试 PTS-创建压测-JMeter压测施压配置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试 PTS-创建压测-JMeter压测施压配置.png)
+![阿里云性能测试 PTS-创建压测-JMeter压测施压配置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试PTS-创建压测-JMeter压测施压配置.png)
 
 
 
@@ -121,7 +121,7 @@ PTS控制台 --> 创建压测 --> 创建PTS场景
 
 创建压测 --> 云端录制 
 
-![阿里云性能测试 PTS-创建压测-云端录制设置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试 PTS-创建压测-云端录制设置.png)
+![阿里云性能测试 PTS-创建压测-云端录制设置](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试PTS-创建压测-云端录制设置.png)
 
 
 
@@ -131,13 +131,13 @@ PTS控制台 --> 创建压测 --> 创建PTS场景
 
 然后就可以开始进行录制了
 
-![阿里云性能测试 PTS-创建压测-云端录制](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试 PTS-创建压测-云端录制.png)
+![阿里云性能测试 PTS-创建压测-云端录制](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试PTS-创建压测-云端录制.png)
 
 
 
 #### 导入到场景
 
-![阿里云性能测试 PTS-创建压测-云端录制导入到场景](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试 PTS-创建压测-云端录制导入到场景.png)
+![阿里云性能测试 PTS-创建压测-云端录制导入到场景](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/阿里云性能测试PTS-创建压测-云端录制导入到场景.png)
 
 
 
