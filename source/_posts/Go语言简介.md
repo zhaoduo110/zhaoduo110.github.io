@@ -1,8 +1,15 @@
 ---
 title: Go语言简介
 date: 2021-03-08 22:52:18
-tags:
+abbrlink: b9dafd7e
+top_img: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/5a4dbec0c6bbc.jpg
+cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/5a4dbec0c6bbc.jpg
+tags: Go
 ---
+
+
+
+
 
 
 
