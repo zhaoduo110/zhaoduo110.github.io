@@ -1,9 +1,9 @@
 ---
 title: Go语言简介
 top_img: >-
-  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/5a4dbec0c6bbc.jpg
+  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218986852.jpg
 cover: >-
-  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/5a4dbec0c6bbc.jpg
+  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218986852.jpg
 tags: Go
 abbrlink: 26194d0d
 date: 2021-03-08 22:52:18
