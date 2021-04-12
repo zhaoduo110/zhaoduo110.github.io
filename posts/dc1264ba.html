@@ -1,0 +1,443 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MySQL知识梳理-6.系统函数 | Yet</title><meta name="description" content="Dual表是虚拟表，并没有实际意义，MySQL的中的Dual只是为了满足SQL的习惯，在MySQL中以下两种sql效果一致 12SELECT NOW();SELECT NOW() FROM DUAL;  但是在Oracle中第一种写法会报错，必须使用第二种 但是MySQL中 SELECT * FROM DUAL; 会报错 1096 - No tables used 常用时间函数CURDATE()"><meta name="keywords" content="MySQL,SQL"><meta name="author" content="Mr、 Zhao"><meta name="copyright" content="Mr、 Zhao"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="MySQL知识梳理-6.系统函数"><meta name="twitter:description" content="Dual表是虚拟表，并没有实际意义，MySQL的中的Dual只是为了满足SQL的习惯，在MySQL中以下两种sql效果一致 12SELECT NOW();SELECT NOW() FROM DUAL;  但是在Oracle中第一种写法会报错，必须使用第二种 但是MySQL中 SELECT * FROM DUAL; 会报错 1096 - No tables used 常用时间函数CURDATE()"><meta name="twitter:image" content="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg"><meta property="og:type" content="article"><meta property="og:title" content="MySQL知识梳理-6.系统函数"><meta property="og:url" content="https://zhaoduo110.github.io/posts/dc1264ba.html"><meta property="og:site_name" content="Yet"><meta property="og:description" content="Dual表是虚拟表，并没有实际意义，MySQL的中的Dual只是为了满足SQL的习惯，在MySQL中以下两种sql效果一致 12SELECT NOW();SELECT NOW() FROM DUAL;  但是在Oracle中第一种写法会报错，必须使用第二种 但是MySQL中 SELECT * FROM DUAL; 会报错 1096 - No tables used 常用时间函数CURDATE()"><meta property="og:image" content="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg"><meta property="article:published_time" content="2021-03-25T05:47:01.000Z"><meta property="article:modified_time" content="2021-04-02T04:04:23.855Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhaoduo110.github.io/posts/dc1264ba.html"><link rel="prev" title="MySQL知识梳理-7.SQL优化-慢查询日志" href="https://zhaoduo110.github.io/posts/a27033e6.html"><link rel="next" title="MySQL知识梳理-5.SQL语言-DML &amp; DQL" href="https://zhaoduo110.github.io/posts/71c7929b.html"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":1,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">30</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">10</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用时间函数"><span class="toc-number">1.</span> <span class="toc-text">常用时间函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CURDATE-CURTIME"><span class="toc-number">1.1.</span> <span class="toc-text">CURDATE() &#x2F; CURTIME()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NOW"><span class="toc-number">1.2.</span> <span class="toc-text">NOW()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DATE-FORMAT-date-fmt"><span class="toc-number">1.3.</span> <span class="toc-text">DATE_FORMAT(date, fmt)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SEC-TO-TIME-seconds"><span class="toc-number">1.4.</span> <span class="toc-text">SEC_TO_TIME(seconds)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TIME-TO-SEC-H-i-s"><span class="toc-number">1.5.</span> <span class="toc-text">TIME_TO_SEC(H:i:s)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DATEDIFF-date1-date2"><span class="toc-number">1.6.</span> <span class="toc-text">DATEDIFF(date1,date2)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DATE-ADD-date-INTERVAL-expr-unit"><span class="toc-number">1.7.</span> <span class="toc-text">DATE_ADD(date,INTERVAL expr unit)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EXTRACT-unit-FROM-date"><span class="toc-number">1.8.</span> <span class="toc-text">EXTRACT(unit FROM date)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UNIX-TIMESTAMP"><span class="toc-number">1.9.</span> <span class="toc-text">UNIX_TIMESTAMP()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FROM-UNIXTIME"><span class="toc-number">1.10.</span> <span class="toc-text">FROM_UNIXTIME()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用字符串函数"><span class="toc-number">2.</span> <span class="toc-text">常用字符串函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CONCAT-str1-str2…"><span class="toc-number">2.1.</span> <span class="toc-text">CONCAT(str1, str2…)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CONCAT-WS-sep-str1-str2…"><span class="toc-number">2.2.</span> <span class="toc-text">CONCAT_WS(sep, str1, str2…)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CHAR-LENGTH-str"><span class="toc-number">2.3.</span> <span class="toc-text">CHAR_LENGTH(str)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LENGTH-str"><span class="toc-number">2.4.</span> <span class="toc-text">LENGTH(str)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FORMAT-X-D-locale"><span class="toc-number">2.5.</span> <span class="toc-text">FORMAT(X, D[,locale])</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LEFT-str-len-RIGHT-str-len"><span class="toc-number">2.6.</span> <span class="toc-text">LEFT(str,len) &#x2F; RIGHT(str,len)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SUBSTRING-str-pos-len"><span class="toc-number">2.7.</span> <span class="toc-text">SUBSTRING(str, pos[, len])</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SUBSTRING-INDEX-str-delim-count"><span class="toc-number">2.8.</span> <span class="toc-text">SUBSTRING_INDEX(str, delim,count)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LOCATE-substr-str-pos"><span class="toc-number">2.9.</span> <span class="toc-text">LOCATE(substr, str[,pos])</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TRIM-remstr-FROM-str"><span class="toc-number">2.10.</span> <span class="toc-text">TRIM([remstr FROM] str)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他常用函数"><span class="toc-number">3.</span> <span class="toc-text">其他常用函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RAOUD-X-D"><span class="toc-number">3.1.</span> <span class="toc-text">RAOUD(X[,D])</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RAND"><span class="toc-number">3.2.</span> <span class="toc-text">RAND()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制"><span class="toc-number">3.3.</span> <span class="toc-text">流程控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MD5-str"><span class="toc-number">3.4.</span> <span class="toc-text">MD5(str)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#窗口函数"><span class="toc-number">4.</span> <span class="toc-text">窗口函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">4.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用"><span class="toc-number">4.2.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本语法"><span class="toc-number">4.3.</span> <span class="toc-text">基本语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">4.4.</span> <span class="toc-text">使用</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Yet</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">MySQL知识梳理-6.系统函数</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-03-25 13:47:01"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2021-03-25</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-04-02 12:04:23"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-04-02</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SQL/">SQL</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>Dual表是虚拟表，并没有实际意义，MySQL的中的Dual只是为了满足SQL的习惯，在MySQL中以下两种sql效果一致</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT NOW();</span><br><span class="line">SELECT NOW() FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<p>但是在Oracle中第一种写法会报错，必须使用第二种</p>
+<p>但是MySQL中 <code>SELECT * FROM DUAL;</code> 会报错 <code>1096 - No tables used</code></p>
+<h1 id="常用时间函数"><a href="#常用时间函数" class="headerlink" title="常用时间函数"></a>常用时间函数</h1><h2 id="CURDATE-CURTIME"><a href="#CURDATE-CURTIME" class="headerlink" title="CURDATE() / CURTIME()"></a>CURDATE() / CURTIME()</h2><p>返回当前日期 / 返回当前时间</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-- 以下都返回 2021-03-25</span><br><span class="line">SELECT CURDATE() FROM DUAL;</span><br><span class="line">SELECT CURRENT_DATE FROM DUAL;</span><br><span class="line"></span><br><span class="line">-- 以下都返回 14:09:48</span><br><span class="line">SELECT CURTIME() FROM DUAL;</span><br><span class="line">SELECT CURRENT_TIME FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="NOW"><a href="#NOW" class="headerlink" title="NOW()"></a>NOW()</h2><p>返回当前的日期和时间</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT NOW() FROM DUAL;</span><br><span class="line">-- 返回 2021-03-25 14:11:14</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DATE-FORMAT-date-fmt"><a href="#DATE-FORMAT-date-fmt" class="headerlink" title="DATE_FORMAT(date, fmt)"></a>DATE_FORMAT(date, fmt)</h2><p>按照fmt格式对日期date进行格式化</p>
+<p>fmt：</p>
+<ul>
+<li>%Y   四位的年</li>
+<li>%m 月份(00-12)</li>
+<li>%d  天(00-31) </li>
+<li>%H 小时(00-24) </li>
+<li>%i   分钟(00-59) </li>
+<li>%s  秒(00-59)</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 返回 2021--25--25 14:20:35</span><br><span class="line">SELECT DATE_FORMAT(NOW(), &#39;%Y--%d--%d %H:%i:%s&#39;) FROM DUAL;</span><br><span class="line"></span><br><span class="line">-- 返回 20191111 00:00:00</span><br><span class="line">SELECT DATE_FORMAT(&#39;2019-05-11&#39;, &#39;%Y%d%d %H:%i:%s&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="SEC-TO-TIME-seconds"><a href="#SEC-TO-TIME-seconds" class="headerlink" title="SEC_TO_TIME(seconds)"></a>SEC_TO_TIME(seconds)</h2><p>把秒数转换为(小时:分:秒)</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回 01:40:00，即6000秒是1个小时40分钟</span><br><span class="line">SELECT SEC_TO_TIME(6000) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="TIME-TO-SEC-H-i-s"><a href="#TIME-TO-SEC-H-i-s" class="headerlink" title="TIME_TO_SEC(H:i:s)"></a>TIME_TO_SEC(H:i:s)</h2><p>把时间(小时:分:秒)转换为秒数</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回 3000， 即50分钟为3000秒</span><br><span class="line">SELECT TIME_TO_SEC(&#39;00:50:00&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DATEDIFF-date1-date2"><a href="#DATEDIFF-date1-date2" class="headerlink" title="DATEDIFF(date1,date2)"></a>DATEDIFF(date1,date2)</h2><p>返回date1和date2两个日期相差的天数</p>
+<p>注意：第一个参数为靠后的日期，否则会出现负数</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回 731</span><br><span class="line">SELECT DATEDIFF(&#39;2021-03-25&#39;, &#39;2019-03-25&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DATE-ADD-date-INTERVAL-expr-unit"><a href="#DATE-ADD-date-INTERVAL-expr-unit" class="headerlink" title="DATE_ADD(date,INTERVAL expr unit)"></a>DATE_ADD(date,INTERVAL expr unit)</h2><p>对给定的日期增加或减少指定的时间单元</p>
+<p>unit：</p>
+<ul>
+<li>DAY    天</li>
+<li>HOUR  小时</li>
+<li>MINUTES    分钟</li>
+<li>SECOND  秒</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- 当前日期时间  返回 2021-03-25 14:34:22</span><br><span class="line">SELECT NOW() FROM DUAL;</span><br><span class="line">-- 一天后  返回 2021-03-26 14:34:22</span><br><span class="line">SELECT DATE_ADD(NOW(), INTERVAL 1 DAY) FROM DUAL;</span><br><span class="line">-- 一年之前  返回 2020-03-25 14:34:22</span><br><span class="line">SELECT DATE_ADD(NOW(), INTERVAL -1 YEAR) FROM DUAL;</span><br><span class="line">-- 一个半小时之前 返回 2021-03-25 13:04:22</span><br><span class="line">SELECT DATE_ADD(NOW() , INTERVAL &#39;-1:30&#39; HOUR_MINUTE) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="EXTRACT-unit-FROM-date"><a href="#EXTRACT-unit-FROM-date" class="headerlink" title="EXTRACT(unit FROM date)"></a>EXTRACT(unit FROM date)</h2><p>返回日期date的指定部分</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- 当前日期时间  返回 2021-03-25 14:37:39</span><br><span class="line">SELECT NOW() FROM DUAL;</span><br><span class="line">-- 年份  返回 2021</span><br><span class="line">SELECT EXTRACT(YEAR FROM NOW()) FROM DUAL;</span><br><span class="line">-- 日期  25</span><br><span class="line">SELECT EXTRACT(DAY FROM NOW()) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="UNIX-TIMESTAMP"><a href="#UNIX-TIMESTAMP" class="headerlink" title="UNIX_TIMESTAMP()"></a>UNIX_TIMESTAMP()</h2><p>返回unix时间戳</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 返回当前秒级时间戳</span><br><span class="line">SELECT UNIX_TIMESTAMP() FROM DUAL;</span><br><span class="line"></span><br><span class="line">-- 返回 2020-01-01 5:04:45 的时间戳</span><br><span class="line">SELECT UNIX_TIMESTAMP(&#39;2020-01-01 5:04:45&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="FROM-UNIXTIME"><a href="#FROM-UNIXTIME" class="headerlink" title="FROM_UNIXTIME()"></a>FROM_UNIXTIME()</h2><p>把UNIX时间戳转换为日期时间</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 返回 1577826285的日期时间 2020-01-01 05:04:45</span><br><span class="line">SELECT FROM_UNIXTIME(1577826285) FROM DUAL;</span><br><span class="line"></span><br><span class="line">-- 返回 1577826285的日期时间并进行格式化 2020--01--01 05:04:45</span><br><span class="line">SELECT FROM_UNIXTIME(1577826285, &#39;%Y--%m--%d %H:%i:%s&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="常用字符串函数"><a href="#常用字符串函数" class="headerlink" title="常用字符串函数"></a>常用字符串函数</h1><h2 id="CONCAT-str1-str2…"><a href="#CONCAT-str1-str2…" class="headerlink" title="CONCAT(str1, str2…)"></a>CONCAT(str1, str2…)</h2><p>把多个字符串连接成一个字符串</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 拼接aa和bb  返回aabb</span><br><span class="line">SELECT CONCAT(&#39;aa&#39;,&#39;bb&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="CONCAT-WS-sep-str1-str2…"><a href="#CONCAT-WS-sep-str1-str2…" class="headerlink" title="CONCAT_WS(sep, str1, str2…)"></a>CONCAT_WS(sep, str1, str2…)</h2><p>用指定的分隔符sep连接字符串</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用-字符拼接aa和bb  返回aa-bb</span><br><span class="line">SELECT CONCAT_WS(&#39;-&#39;, &#39;aa&#39;,&#39;bb&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="CHAR-LENGTH-str"><a href="#CHAR-LENGTH-str" class="headerlink" title="CHAR_LENGTH(str)"></a>CHAR_LENGTH(str)</h2><p>返回字符串str的字符个数</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回3  只有3个字符</span><br><span class="line">SELECT CHAR_LENGTH(&#39;aa赵&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LENGTH-str"><a href="#LENGTH-str" class="headerlink" title="LENGTH(str)"></a>LENGTH(str)</h2><p>返回字符串str的字节个数</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回5   一个中文占3个字节</span><br><span class="line">SELECT LENGTH(&#39;aa赵&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="FORMAT-X-D-locale"><a href="#FORMAT-X-D-locale" class="headerlink" title="FORMAT(X, D[,locale])"></a>FORMAT(X, D[,locale])</h2><p>将数字X格式化，如 “#,###,###.##”， 并舍入到D位小数</p>
+<ul>
+<li><code>locale</code>是一个可选参数，用于确定千个分隔符和分隔符之间的分组。如果省略<code>locale</code>操作符，MySQL将默认使用<code>en_US</code>。以下链接提供MySQL支持的所有区域名称：<a href="http://dev.mysql.com/doc/refman/5.7/en/locale-support.html" target="_blank" rel="noopener">http://dev.mysql.com/doc/refman/5.7/en/locale-support.html</a></li>
+</ul>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回 10,000.00</span><br><span class="line">SELECT FORMAT(10000,2) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LEFT-str-len-RIGHT-str-len"><a href="#LEFT-str-len-RIGHT-str-len" class="headerlink" title="LEFT(str,len) / RIGHT(str,len)"></a>LEFT(str,len) / RIGHT(str,len)</h2><p>  从字符串左/右 起返回长度为len的子字符串</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回bbbbb和aaaa</span><br><span class="line">SELECT LEFT(&#39;bbbbbb&#39;, 5),RIGHT(&#39;aaaa&#39;, 4) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="SUBSTRING-str-pos-len"><a href="#SUBSTRING-str-pos-len" class="headerlink" title="SUBSTRING(str, pos[, len])"></a>SUBSTRING(str, pos[, len])</h2><p>从字符串str的pos位置起返回长度为len的子串，如果未指定len则一直到字符串结束</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回aa和aaaa</span><br><span class="line">SELECT SUBSTRING(&#39;aaaaaa&#39; FROM 3 FOR 2),SUBSTRING(&#39;aaaaaa&#39; FROM 3) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="SUBSTRING-INDEX-str-delim-count"><a href="#SUBSTRING-INDEX-str-delim-count" class="headerlink" title="SUBSTRING_INDEX(str, delim,count)"></a>SUBSTRING_INDEX(str, delim,count)</h2><p>返回字符串str按delim分割的前count个子字符串，从右边的第count应该为负数</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回aa-bb</span><br><span class="line">SELECT SUBSTRING_INDEX(&#39;aa-bb-cc-dd-ee&#39;,&#39;-&#39;,2) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LOCATE-substr-str-pos"><a href="#LOCATE-substr-str-pos" class="headerlink" title="LOCATE(substr, str[,pos])"></a>LOCATE(substr, str[,pos])</h2><p>返回substr在str中第一次出现的位置</p>
+<p>pos表示从第几个位置开始</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回3和6</span><br><span class="line">SELECT LOCATE(&#39;-&#39;,&#39;aa-bb-cc-dd-ee&#39;), LOCATE(&#39;-&#39;, &#39;aa-bb-cc-dd-ee&#39;, 4) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="TRIM-remstr-FROM-str"><a href="#TRIM-remstr-FROM-str" class="headerlink" title="TRIM([remstr FROM] str)"></a>TRIM([remstr FROM] str)</h2><p>在字符串str两端删除不需要的字符remstr，不指定remstr则默认删除空格</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回aa bb和aa-bb</span><br><span class="line">SELECT TRIM(&#39; aa bb &#39;),TRIM(&#39;-&#39; FROM &#39;-aa-bb-&#39;) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="其他常用函数"><a href="#其他常用函数" class="headerlink" title="其他常用函数"></a>其他常用函数</h1><h2 id="RAOUD-X-D"><a href="#RAOUD-X-D" class="headerlink" title="RAOUD(X[,D])"></a>RAOUD(X[,D])</h2><p>对数值x进行四舍五入保留D位小数</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 返回3和3.142</span><br><span class="line">SELECT ROUND(3.1415926), ROUND(3.1415926, 3) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="RAND"><a href="#RAND" class="headerlink" title="RAND()"></a>RAND()</h2><p>返回一个在0-1之间的随机数</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 每次执行返回结果都可能不一样</span><br><span class="line">SELECT RAND() FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><p>语法格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CASE WHEN [condition] </span><br><span class="line">	THEN result </span><br><span class="line">	[WHEN [condition] THEN result ...] </span><br><span class="line">	[ELSE result] END</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="MD5-str"><a href="#MD5-str" class="headerlink" title="MD5(str)"></a>MD5(str)</h2><p>返回str的MD5值</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="窗口函数"><a href="#窗口函数" class="headerlink" title="窗口函数"></a>窗口函数</h1><p>MySQL8.0版本新功能。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>简单来说就是<code>对于一个查询SQL，将其结果集按指定的规则进行分区，每个分区可以看作是一个窗口，分区内的每一行，根据其所属分区内的行数据进行函数计算，获取计算结果，作为该行的窗口函数结果值</code>。</p>
+<p>窗口函数与group聚合查询类似，都是对一组（分区）记录进行计算，区别在于<code>group对一组记录计算后返回一条记录作为结果</code>，而<code>窗口函数对一组记录计算后，这组记录中每条数据都会对应一个结果</code>。</p>
+<p><code>窗口函数是对 where 和 group by子句处理后的结果进行操作，因此按照SQL语句的运行顺序，窗口函数一般放在select子句中</code></p>
+<p>在满足某些条件的记录集合上执行的特殊函数，对于每条记录都要在此窗口内执行函数。有的函数随着记录的不同，窗口大小都是固定的，称为<code>静态窗口</code>；有的函数则相反，不同的记录对应着不同的窗口，称为<code>滑动窗口</code></p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
+<li>解决排名问题，e.g. 每个班级按成绩排名</li>
+<li>解决TOPN问题，e.g. 每个班级前两名的学生</li>
+<li>组内比较问题（聚合函数）</li>
+<li>移动平均</li>
+</ul>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;OVER (window_spec) | OVER window_name&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两种格式，区别在于窗口是直接在 OVER 子句中定义，还是由对查询中其他位置定义的命名窗口的引用提供</p>
+<p>第一种格式，窗口直接出现在 OVER 括号之间的子句中，比如 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    ...</span><br><span class="line">    ROW_NUMBER() OVER(PARTITION BY country ORDER BY year, product) AS row_num1</span><br><span class="line">FROM sales;</span><br></pre></td></tr></table></figure>
+
+<p>第二种情况，window_name 是由 WINDOW查询中其他子句定义的窗口规范，称为 <code>命名窗口</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  val,</span><br><span class="line">  ROW_NUMBER() OVER (ORDER BY val) AS &#39;row_number&#39;,</span><br><span class="line">  RANK()       OVER (ORDER BY val) AS &#39;rank&#39;,</span><br><span class="line">  DENSE_RANK() OVER (ORDER BY val) AS &#39;dense_rank&#39;</span><br><span class="line">FROM numbers;</span><br><span class="line">-- 以上这种每个窗口写法都是一样的 就可以写成下面这种</span><br><span class="line">-- 类似于对相同的窗口内容做了一次封装，在多个窗口中调用</span><br><span class="line">SELECT</span><br><span class="line">  val,</span><br><span class="line">  ROW_NUMBER() OVER w AS &#39;row_number&#39;,</span><br><span class="line">  RANK()       OVER w AS &#39;rank&#39;,</span><br><span class="line">  DENSE_RANK() OVER w AS &#39;dense_rank&#39;</span><br><span class="line">FROM numbers</span><br><span class="line">WINDOW w AS (ORDER BY val);</span><br></pre></td></tr></table></figure>
+
+<p>window_spec</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[window_name] [partition_clause] [order_clause] [frame_clause]</span><br></pre></td></tr></table></figure>
+
+<p>如果 window_spec 为空，则该窗口由所有查询行组成，并且window函数使用所有行来计算结果。否则，括号中的子句将确定哪些查询行用于计算函数结果以及它们的划分和排序方式</p>
+<ul>
+<li><p>window_name（针对命名窗口）</p>
+<p>由 WINDOW 查询中其他子句定义的窗口的名称。如果 window_name 它本身出现在 OVER 子句中，则它将完全定义该窗口。如果还给出了分区，排序或框架子句，则它们会修改对命名窗口的解释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-- 以下执行名称为w的窗口函数</span><br><span class="line">SELECT</span><br><span class="line">    ...</span><br><span class="line">    ROW_NUMBER() OVER w AS row_num1</span><br><span class="line">FROM sales</span><br><span class="line">WINDOW w AS (ORDER BY val);</span><br><span class="line">-- 以下 OVER 定义的ORDER BY 会覆盖名称为w窗口中的ORDER BY</span><br><span class="line">SELECT</span><br><span class="line">    ...</span><br><span class="line">    ROW_NUMBER() OVER (w ORDER BY val) AS row_num1</span><br><span class="line">FROM sales</span><br><span class="line">WINDOW w AS (PARTITION BY country);</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ol>
+<li><p>一个 OVER 子句只能添加属性命名的窗口，不能修改它们。<code>如果命名的窗口定义包含分区，排序或框架属性，则 OVER 引用窗口名称的 子句不能包含相同类型的属性</code>，否则会发生错误，如下会报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    ...</span><br><span class="line">    ROW_NUMBER() OVER (w ORDER BY val) AS row_num1</span><br><span class="line">FROM sales</span><br><span class="line">WINDOW w AS (PARTITION BY country ORDER BY year, product);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>命名窗口的定义本身可以以开头 <em><code>window_name</code></em>。在这种情况下，允许向前和向后引用，但不允许循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 这是正常的</span><br><span class="line">WINDOW w1 AS (w2), w2 AS (), w3 AS (w1)</span><br><span class="line">-- 这是错误的</span><br><span class="line">WINDOW w1 AS (w2), w2 AS (w3), w3 AS (w1)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>partition_clause</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PARTITION BY expr [, expr] ...</span><br></pre></td></tr></table></figure>
+
+<p>PARTITION BY子句指示如何将查询行划分为组。给定行的窗口函数结果基于包含该行分区的行。如果省略PARTITION BY，则只存在一个由所有查询行组成的分区。</p>
+<p>标准SQL仅支持 PARTITION BY 后跟列名。MySQL允许表达式，而不仅仅是列名。例如，如果表包含 <a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html" target="_blank" rel="noopener"><code>TIMESTAMP</code></a> 名为的列<code>ts</code>，则标准SQL允许， PARTITION BY ts 但不允许 PARTITION BY HOUR(ts)，而MySQL两者都允许。</p>
+</li>
+<li><p>order_clause</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ORDER BY expr [ASC|DESC] [, expr [ASC|DESC]] ...</span><br></pre></td></tr></table></figure>
+
+<p>ORDER BY子句指示如何对每个分区中的行进行排序。根据ORDER BY子句相等的分区行被认为是对等的。如果省略ORDER BY，则分区行是无序的，没有隐含的处理顺序，并且所有分区行都是对等的。</p>
+<p>每个ORDER BY表达式后面都可以有ASC或DESC来指示排序方向。如果没有指定方向，默认为ASC。对于升序排序，空值优先排序，对于降序排序，空值最后排序。</p>
+<p>窗口定义中的ORDER BY适用于各个分区。要对结果集进行整体排序，请在查询顶层包含ORDER BY。</p>
+</li>
+<li><p>frame_clause</p>
+<p>框架是当前分区的子集，框架子句指定如何定义这个子集。框架子句有许多自己的子句。请参见 <a href="https://dev.mysql.com/doc/refman/8.0/en/window-functions-frames.html" target="_blank" rel="noopener">第12.21.3节“窗口功能框架规范”</a></p>
+<p><code>未完待定</code></p>
+</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>可用于窗口函数的聚合函数</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AVG()</td>
+<td>返回参数的平均值</td>
+</tr>
+<tr>
+<td>BIT_AND()</td>
+<td>按位返回AND</td>
+</tr>
+<tr>
+<td>BIT_OR()</td>
+<td>按位返回OR</td>
+</tr>
+<tr>
+<td>BIT_XOR()</td>
+<td>返回按位异或</td>
+</tr>
+<tr>
+<td>COUNT()</td>
+<td>返回计数返回的行数</td>
+</tr>
+<tr>
+<td>JSON_ARRAYAGG()</td>
+<td>将结果集作为单个JSON数组返回</td>
+</tr>
+<tr>
+<td>JSON_OBJECTAGG()</td>
+<td>将结果集作为单个JSON对象返回</td>
+</tr>
+<tr>
+<td>MAX() MIN()</td>
+<td>返回最大/最小值</td>
+</tr>
+<tr>
+<td>STDDEV_POP(), STDDEV(), STD()</td>
+<td>返回总体标准差</td>
+</tr>
+<tr>
+<td>STDDEV_SAMP()</td>
+<td>返回样本标准差</td>
+</tr>
+<tr>
+<td>SUM()</td>
+<td>返回总和</td>
+</tr>
+<tr>
+<td>VAR_POP(), VARIANCE()</td>
+<td>返回总体标准方差</td>
+</tr>
+<tr>
+<td>VAR_SAMP()</td>
+<td>返回样本方差</td>
+</tr>
+</tbody></table>
+<p>可用于窗口函数的非聚合函数</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CUME_DIST()</td>
+<td>累积分布值</td>
+</tr>
+<tr>
+<td>ROW_NUMBER()</td>
+<td>分区内的当前行数，也可当做顺序排序的序列号，连续不中断</td>
+</tr>
+<tr>
+<td>RANK()</td>
+<td>当前行在其分区中的名次，带有间隙，跳过重复序号，比如 1 1 3</td>
+</tr>
+<tr>
+<td>DENSE_RANK()</td>
+<td>当前行在其分区内的名次，无间隙，不跳过重复序号， 比如 1 1 2</td>
+</tr>
+<tr>
+<td>FIRST_VALUE()</td>
+<td>窗口框架第一行的参数值</td>
+</tr>
+<tr>
+<td>LAG()</td>
+<td>分区内当前行 前N行 的参数值</td>
+</tr>
+<tr>
+<td>LAST_VALUE()</td>
+<td>窗口框架最后一行的参数值</td>
+</tr>
+<tr>
+<td>LEAD()</td>
+<td>分区内当前行的前导参数的值</td>
+</tr>
+<tr>
+<td>NTH_VALUE()</td>
+<td>从窗口第n行开始的参数值</td>
+</tr>
+<tr>
+<td>NTILE()</td>
+<td>Bucket分区内当前行数。</td>
+</tr>
+<tr>
+<td>PERCENT_RANK()</td>
+<td>排名百分比值</td>
+</tr>
+</tbody></table>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Mr、 Zhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zhaoduo110.github.io/posts/dc1264ba.html">https://zhaoduo110.github.io/posts/dc1264ba.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zhaoduo110.github.io" target="_blank">Yet</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a><a class="post-meta__tags" href="/tags/SQL/">SQL</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/a27033e6.html"><img class="prev_cover" data-src="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MySQL知识梳理-7.SQL优化-慢查询日志</div></div></a></div><div class="next-post pull_right"><a href="/posts/71c7929b.html"><img class="next_cover" data-src="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL知识梳理-5.SQL语言-DML &amp; DQL</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/c84d94b.html" title="MySQL知识梳理-1.SQL与NoSQL"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-11</div><div class="relatedPosts_title">MySQL知识梳理-1.SQL与NoSQL</div></div></a></div><div class="relatedPosts_item"><a href="/posts/ea12c5be.html" title="MySQL知识梳理-2.MySQL8.0部署"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-11</div><div class="relatedPosts_title">MySQL知识梳理-2.MySQL8.0部署</div></div></a></div><div class="relatedPosts_item"><a href="/posts/cb78f86f.html" title="MySQL知识梳理-3.MySQL配置详解及参数调优"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-16</div><div class="relatedPosts_title">MySQL知识梳理-3.MySQL配置详解及参数调优</div></div></a></div><div class="relatedPosts_item"><a href="/posts/e4264951.html" title="MySQL知识梳理-4.MySQL常用的存储引擎 & 数据类型"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-18</div><div class="relatedPosts_title">MySQL知识梳理-4.MySQL常用的存储引擎 & 数据类型</div></div></a></div><div class="relatedPosts_item"><a href="/posts/9e341d9c.html" title="MySQL知识梳理-5.SQL语言-DCL"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-20</div><div class="relatedPosts_title">MySQL知识梳理-5.SQL语言-DCL</div></div></a></div><div class="relatedPosts_item"><a href="/posts/a00529d2.html" title="MySQL知识梳理-5.SQL语言-DDL"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-23</div><div class="relatedPosts_title">MySQL知识梳理-5.SQL语言-DDL</div></div></a></div></div><div class="clear_both"></div></div></article></main><footer id="footer" style="background-image: url(https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5ecce72a5977e.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Mr、 Zhao</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">简</a><i class="darkmode far fa-moon" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>
