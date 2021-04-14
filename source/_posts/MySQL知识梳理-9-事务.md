@@ -35,13 +35,9 @@ cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/
 
 
 
-
-
 ## C    一致性（Consistency）
 
 在事务开始之前和事务结束以后，数据库的完整性没有被破坏
-
-
 
 
 
@@ -49,16 +45,12 @@ cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/
 
 事务的隔离性要求每个读写事务的对象与其他事务的操作对象能相互分离，即该事务提交前对其他事务都不可见
 
-
-
-INNODB的隔离级别
+**INNODB的隔离级别**
 
 - 顺序读（SERIALIZABLE）
 - 可重复读（RERPEATABLE READ）
 - 读已提交（READ COMMITTED）
 - 读未提交（READ UNCOMMITTED）
-
-
 
 
 

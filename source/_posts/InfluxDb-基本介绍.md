@@ -71,9 +71,29 @@ IT基础设施
 
 
 
+
+
+
+
+
+
+
+
 # InfluxData
 
 ![InfluxData](https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/2020090315210441252.png)
+
+
+
+## TICK 与 InfluxDB
+
+TICK 是 InfluxData 平台的组件集的缩写，分别代表四大组件：Telegraf（数据收集器）、InfluxDB（时序数据库）、Chronograf（可视化 UI）和 Kapacitor（监控服务）。
+
+InfluxData 公司的愿景是帮助人们处理时序数据，仅依靠一个时序数据库是不够的，还需要解决因为时序数据自身产生的一系列问题。因此 InfluxData 决定设计并开发 TICK。
+
+在早期 Kapacitor 的脚本语言是 TICKScript，但是并不好用，遭受到社区中很多人的诟病。因此出现了 Flux。Flux 的功能性比 InfluxQL 更强，比 TICKScript 更易用。
+
+随着 Flux 的逐渐发展，InfluxDB 的能力范围也在逐步扩展
 
 
 
@@ -126,26 +146,20 @@ IT基础设施
 ```sql
 -- 创建数据库
 create database "db_name"
-
 -- 显示所有的数据库
 show databases
-
 -- 删除数据库
 drop database "db_name"
-
 -- 使用数据库
 use db_name
-
 -- 显示该数据库中所有的表
 show measurements
-
 -- 创建表，直接在插入数据的时候指定表名
 insert test,host=127.0.0.1,monitor_name=test count=1
 -- test为表名 
 -- host和monitor_name为tag_key  127.0.0.1和test为tag_value 
 -- 注意后面的空格
 -- count为filed_key   1为filed_value
-
 -- 删除表
 drop measurement "measurement_name"
 ```
@@ -163,13 +177,9 @@ influx -import -path=NOAA_data.txt -precision=s -database=NOAA_water_database
 
 ```
 # DDL
-
 CREATE DATABASE NOAA_water_database
-
 # DML
-
 # CONTEXT-DATABASE: NOAA_water_database
-
 h2o_feet,location=coyote_creek water_level=8.120,level\ description="between 6 and 9 feet" 1566000000
 h2o_feet,location=coyote_creek water_level=8.005,level\ description="between 6 and 9 feet" 1566000360
 h2o_feet,location=coyote_creek water_level=7.887,level\ description="between 6 and 9 feet" 1566000720
@@ -269,8 +279,6 @@ DROP SERIES from pay where tag_key=''
 
 
 
-
-
 ## 函数
 
 官方文档：[InfluxQL functions | InfluxDB OSS 1.8 Documentation (influxdata.com)](https://docs.influxdata.com/influxdb/v1.8/query_language/functions/)
@@ -364,10 +372,6 @@ DROP SERIES from pay where tag_key=''
 
 
 
-
-
-
-
 # 数据采集
 
 ### 无开发
@@ -426,16 +430,6 @@ Flux：facebook开源，使用单向数据流的React的应用程序架构
 
 
 **influxQL语句插入**
-
-
-
-
-
-# 数据可视化
-
-chronograf：influxdata出品，influxdb可视化管理工具，支持图表显示，告警，只支持influxdb 1.X
-
-grafana：用于监控和可视化的开源平台。
 
 
 
