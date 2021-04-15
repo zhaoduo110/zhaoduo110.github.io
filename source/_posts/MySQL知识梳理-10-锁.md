@@ -13,8 +13,6 @@ cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/
 
 
 
-
-
 # 锁的作用
 
 解决资源竞争的问题，使得资源可以独享
