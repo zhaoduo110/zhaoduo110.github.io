@@ -266,7 +266,7 @@ npm install
 
 **命令：**
 
-hexo new [layout] <title>
+`hexo new [layout] <title>`
 
 **作用：**
 
@@ -473,4 +473,10 @@ git add .
 git commit -m '添加文章阿里云性能测试简单使用'
 git push
 ```
+
+
+
+
+
+
 
