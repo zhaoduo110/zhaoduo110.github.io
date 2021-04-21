@@ -77,7 +77,7 @@ wget https://github.com/alibaba/canal/releases/download/canal-1.1.5/canal.deploy
 
 ```
 mkdir /usr/local/canal
-tar zxvf canal.deployer-$version.tar.gz  -C /usr/local/canal
+tar zxvf canal.deployer-1.1.5.tar.gz -C /usr/local/canal
 ```
 
 ### 操作
@@ -91,7 +91,7 @@ tar zxvf canal.deployer-$version.tar.gz  -C /usr/local/canal
 /usr/local/canal/bin/stop.sh
 ```
 
-
+`服务器需放开 11110、11111、11112 端口`
 
 
 
@@ -108,6 +108,8 @@ tar zxvf canal.deployer-$version.tar.gz  -C /usr/local/canal
 ## canal WebUI
 
 [官方文档](https://github.com/alibaba/canal/wiki/Canal-Admin-Guide)
+
+`机器需要放开8089端口`
 
 ### 下载解压缩
 
@@ -172,6 +174,18 @@ mysql -h ..... -u xxx -p
 sh bin/startup.sh
 sh bin/stop.sh
 ```
+
+**查看日志**
+
+```
+vi logs/admin.log
+```
+
+访问地址 ip:8089
+
+默认账密 admin   123456
+
+
 
 
 

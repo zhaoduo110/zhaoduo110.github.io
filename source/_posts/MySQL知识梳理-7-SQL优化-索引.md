@@ -13,6 +13,12 @@ cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/
 
 
 
+
+
+> `此篇纯属误人子弟，MySQL的先到此为止，以后有兴趣再整理`
+
+
+
 # 什么是索引
 
 索引是帮助MySQL高效获取数据的排好序的数据结构
