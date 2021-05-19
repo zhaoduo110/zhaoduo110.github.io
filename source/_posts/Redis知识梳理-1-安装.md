@@ -25,6 +25,11 @@ cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/
 
 官方测试结果：读 110000次/s ，写 81000次/s
 
+### 网站
+
+- 官网：https://redis.io/
+- 中文网：http://redis.cn/
+
 
 
 # 安装
@@ -62,8 +67,6 @@ cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/
 
 
 ---
-
-
 
 
 
