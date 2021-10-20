@@ -2,8 +2,8 @@
 title: Hexo+github+gitee搭建博客
 abbrlink: bad90aa0
 date: 2020-05-26 00:45:44
-top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5a27d7aa3c85b.jpg
-cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/5a27d7aa3c85b.jpg
+top_img: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618219017853.jpg
+cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618219017853.jpg
 tags: 
 ---
 

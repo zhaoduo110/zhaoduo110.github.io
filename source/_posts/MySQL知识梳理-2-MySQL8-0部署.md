@@ -7,8 +7,8 @@ tags:
   - SQL
 abbrlink: ea12c5be
 date: 2021-03-11 10:36:49
-top_img: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618219017853.jpg'
-cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618219017853.jpg'
+top_img: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218831023.jpg'
+cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218831023.jpg'
 ---
 
 
@@ -269,7 +269,6 @@ use mysql;
 select host, user, authentication_string, plugin from user;
 update user set host='%' where user='root';
 ```
-
 
 
 

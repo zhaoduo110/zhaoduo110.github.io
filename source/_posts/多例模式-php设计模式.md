@@ -7,8 +7,8 @@ tags:
   - 设计模式
 abbrlink: baac6cc2
 date: 2020-05-27 16:50:40
-top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/timg1.jpg
-cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/timg1.jpg
+top_img: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218943853.jpg
+cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218943853.jpg
 ---
 
 

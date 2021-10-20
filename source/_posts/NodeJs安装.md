@@ -7,8 +7,8 @@ tags:
   - - NodeJs
 abbrlink: 6c48ffe7
 date: 2020-05-27 16:28:39
-top_img: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg
-cover: https://could-res-1252778021.file.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg
+top_img: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218970854.jpg
+cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218970854.jpg
 ---
 
 ## node、npm、cnpm、nvm

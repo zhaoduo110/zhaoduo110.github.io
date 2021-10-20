@@ -2,8 +2,8 @@
 title: 性能测试工具JMeter简单使用
 abbrlink: 1053ab1d
 date: 2020-07-01 15:41:43
-top_img: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/fdafcf5fe7ef277b7af4e59127a0fa78.jpg
-cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/fdafcf5fe7ef277b7af4e59127a0fa78.jpg
+top_img: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218919853.jpg
+cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218919853.jpg
 tags: 测试
 ---
 

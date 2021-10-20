@@ -8,9 +8,9 @@ tags:
   - 大数据
   - SQL
 top_img: >-
-  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218793.jpg
+  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218986852.jpg
 cover: >-
-  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218793.jpg
+  https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218986852.jpg
 abbrlink: 5a68a630
 date: 2021-04-20 16:59:57
 ---

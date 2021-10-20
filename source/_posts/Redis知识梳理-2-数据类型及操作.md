@@ -7,8 +7,8 @@ categories:
 tags:
   - Redis
   - NoSQL
-top_img: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218907854.jpg'
-cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218907854.jpg'
+top_img: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218964853.jpg'
+cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218964853.jpg'
 ---
 
 
@@ -769,9 +769,14 @@ OK
 
 #### BLPOP
 
+官方文档：http://redis.cn/commands/blpop.html
+
 用法：BLPOP key [key ...] timeout
 
 作用：命令 [LPOP](http://redis.cn/commands/lpop.html) 的阻塞版本，这是因为当给定列表内没有任何元素可供弹出的时候， 连接将被 [BLPOP](http://redis.cn/commands/blpop.html) 命令阻塞。 当给定多个 key 参数时，按参数 key 的先后顺序依次检查各个列表，弹出第一个非空列表的头元素
+
+- 主要是当队列内没有元素时则阻塞队列，如果阻塞多个队列的话则依次从左到右检查，直到有一个队列弹出元素
+- 与lpop的区别是 当队列中没有数据时lpop会返回nil，而blpop则阻塞队列
 
 返回：
 
@@ -781,7 +786,9 @@ OK
 
 #### BRPOP
 
-用法：
+官方文档：http://redis.cn/commands/brpop.html
+
+用法：RPOP命令的阻塞版本，作用用法等于BLPOP和LPOP的关系一样
 
 作用：
 
@@ -793,49 +800,127 @@ OK
 
 #### LLEN
 
-用法：
+用法：LLEN key
 
 作用：
 
-返回：
+- 返回存储在 key 里的list的长度。 
+- 如果 key 不存在，那么就被看作是空list，并且返回长度为 0。 
+- 当存储在 key 里的值不是一个list的话，会返回error
 
-注意: 
+返回：key对应的list的长度
 
 举例：
+
+```shell
+127.0.0.1:6379> LPUSH key1 value1 value2 value3
+(integer) 3
+127.0.0.1:6379> LLEN key1
+(integer) 3
+127.0.0.1:6379> LPOP key1
+"value3"
+127.0.0.1:6379> LPOP key1
+"value2"
+127.0.0.1:6379> LLEN key1
+(integer) 1
+127.0.0.1:6379> LPOP key1
+"value1"
+127.0.0.1:6379> LLEN key1
+(integer) 0
+```
 
 #### LINDEX
 
-用法：
+用法：LINDEX key index
 
 作用：
 
-返回：
+- 返回列表里索引为 index 的元素。 
+- 下标是从0开始索引的，所以 0 是表示第一个元素， 1 表示第二个元素，并以此类推。 
+- 负数索引用于指定从列表尾部开始索引的元素。在这种方法下，-1 表示最后一个元素，-2 表示倒数第二个元素，并以此往前推
+- 当 key 位置的值不是一个列表的时候，会返回一个error
 
-注意: 
+返回：请求的对应元素，或者当 index 超过范围的时候返回 nil
+
+注意：==是返回，元素并不会从列表中移除==
 
 举例：
+
+```shell
+# push一个列表
+127.0.0.1:6379> LPUSH key1 value1 value2 value3
+(integer) 3
+# 查看列表中所有元素
+127.0.0.1:6379> LRANGE key1 0 -1
+1) "value3"
+2) "value2"
+3) "value1"
+# 查看列表中第一个元素
+127.0.0.1:6379> LINDEX key1 0
+"value3"
+127.0.0.1:6379> LRANGE key1 0 -1
+1) "value3"
+2) "value2"
+3) "value1"
+# 查看列表中第三个元素
+127.0.0.1:6379> LINDEX key1 2
+"value1"
+127.0.0.1:6379> LRANGE key1 0 -1
+1) "value3"
+2) "value2"
+3) "value1"
+# 查看列表中倒数第二个元素
+127.0.0.1:6379> LINDEX key1 -2
+"value2
+```
 
 #### LSET
 
-用法：
+用法：LSET key index value
 
 作用：
 
-返回：
+- 设置 index 位置的list元素的值为 value
+- 当index超出范围时会返回一个error
 
-注意: 
+返回：成功时返回OK
 
 举例：
 
+```
+127.0.0.1:6379> LPUSH key1 value1 value2 value3
+(integer) 3
+127.0.0.1:6379> LRANGE key1 0 -1
+1) "value3"
+2) "value2"
+3) "value1"
+127.0.0.1:6379> LSET key1 1 11111
+OK
+127.0.0.1:6379> LRANGE key1 0 -1
+1) "value3"
+2) "11111"
+3) "value1"
+127.0.0.1:6379> LSET key1 -1 22222
+OK
+127.0.0.1:6379> LRANGE key1 0 -1
+1) "value3"
+2) "11111"
+3) "22222"
+```
+
 #### LINSERT
 
-用法：
+用法：LINSERT key BEFORE|AFTER pivot value
 
 作用：
 
-返回：
+- 在元素 pivot 的前面或后面插入value到列表 key 中 
 
-注意: 
+- 当 key 不存在时，这个list会被看作是空list，任何操作都不会发生。
+
+- 当 key 存在，但保存的不是一个list的时候，会返回error
+
+返回：经过插入操作后的list长度，或者当 pivot 值找不到的时候返回 -1
 
 举例：
 

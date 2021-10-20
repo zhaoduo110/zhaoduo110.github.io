@@ -7,8 +7,8 @@ categories:
 tags:
   - ClickHouse
   - SQL
-top_img: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218793.jpg'
-cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218793.jpg'
+top_img: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/5a27d7aa3c85b.jpg'
+cover: 'https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/5a27d7aa3c85b.jpg'
 ---
 
 
