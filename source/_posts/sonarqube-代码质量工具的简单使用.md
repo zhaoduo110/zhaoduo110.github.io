@@ -32,9 +32,9 @@ cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1
 
 #### 设置令牌
 
-可以使用已有令牌也可以新建
+可以使用已有Token也可以新建
 
-令牌可以使用 md5('项目名')
+Token可以使用 md5('项目名')
 
 创建完成后点击继续
 
@@ -52,7 +52,7 @@ cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1
 
 3. 下载对应平台的扫描器
 
-   下载页面：https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/
+   下载页面：[https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)
 
    linux上需要执行
 
@@ -90,13 +90,13 @@ cover: https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1
 
 ### sonar-scanner扫描命令的配置
 
-| 配置项     | 作用                                                     | 取值           |
-| ---------- | -------------------------------------------------------- | -------------- |
-| projectKey | 项目名称                                                 |                |
-| sources    | 要扫描的目录                                             |                |
-| host.url   | sonar服务器ip或者域名                                    | http://ip:port |
-| login      | 管理后台设置的令牌                                       |                |
-| exclusions | 要排除的目录或者文件，不需要扫描的。<br>测试无效，未解决 | vendor         |
+| 配置项     | 作用                                                     | 取值   |
+| ---------- | -------------------------------------------------------- | ------ |
+| projectKey | 项目名称                                                 |        |
+| sources    | 要扫描的目录                                             |        |
+| host.url   | sonar服务器ip或者域名                                    |        |
+| login      | 管理后台设置的令牌                                       |        |
+| exclusions | 要排除的目录或者文件，不需要扫描的。<br>测试无效，未解决 | vendor |
 
 
 
