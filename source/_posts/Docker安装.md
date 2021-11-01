@@ -156,10 +156,6 @@ docker --version
 
 
 
-
-
-
-
 ## 卸载Docker引擎
 
 ### 卸载 Docker Engine、CLI 和 Containerd 包
@@ -181,9 +177,120 @@ rm -rf /var/lib/containerd
 
 
 
+## image仓库的镜像网址
+
+由于人尽皆知的原因，国内访问Docker的官方仓库很慢，所以可以通过以下方式把仓库网址改为国内的镜像站
 
 
 
+
+
+
+
+
+
+
+
+# Windows(10)
+
+## 安装Docker DeskTop
+
+### 开启Hyper-V
+
+注意：windows上安装docker需要开启Hyper-v功能（开启此功能好像会导致VMWare启动不了）
+
+这里搜索的时候只能用拼音qiyong，试了好几次中文搜不出来
+
+![image-20211028191539463](https://could-res-1252778021.file.myqcloud.com/img/image-20211028191539463.png)
+
+找到Hyper-V 前面复选框选上，点击确定，等待安装完成重启就可以了
+
+![image-20211028191640598](https://could-res-1252778021.file.myqcloud.com/img/image-20211028191640598.png)
+
+
+
+##### 修改虚拟机和虚拟硬盘存储位置
+
+![image-20211028191136178](https://could-res-1252778021.file.myqcloud.com/img/image-20211028191136178.png)
+
+
+
+
+
+
+
+### 安装
+
+直接下载安装包即可：https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
+
+
+
+### 配置修改
+
+因为docker默认安装到C盘，很多（比如images）的存储位置也是在C盘，为了节省C盘空间，所以需要把一些存储文件存到其他地方
+
+#### images存储位置修改
+
+![image-20211028190813323](https://could-res-1252778021.file.myqcloud.com/img/image-20211028190813323.png)
+
+
+
+#### Hyper-V虚拟硬盘
+
+##### 打开Hyper-V管理器
+
+![image-20211028191037421](https://could-res-1252778021.file.myqcloud.com/img/image-20211028191037421.png)
+
+
+
+
+
+## 卸载
+
+参考：https://www.cnblogs.com/lonquanzj/p/8911977.html
+
+### 卸载docker程序
+
+新建文件 `a.ps1`
+
+```
+$ErrorActionPreference = "SilentlyContinue"
+ 
+kill -force -processname 'Docker for Windows', com.docker.db, vpnkit, com.docker.proxy, com.docker.9pdb, moby-diag-dl, dockerd
+ 
+try {
+    ./MobyLinux.ps1 -Destroy
+} Catch {}
+ 
+$service = Get-WmiObject -Class Win32_Service -Filter "Name='com.docker.service'"
+if ($service) { $service.StopService() }
+if ($service) { $service.Delete() }
+Start-Sleep -s 5
+Remove-Item -Recurse -Force "~/AppData/Local/Docker"
+Remove-Item -Recurse -Force "~/AppData/Roaming/Docker"
+if (Test-Path "C:\ProgramData\Docker") { takeown.exe /F "C:\ProgramData\Docker" /R /A /D Y }
+if (Test-Path "C:\ProgramData\Docker") { icacls "C:\ProgramData\Docker\" /T /C /grant Administrators:F }
+Remove-Item -Recurse -Force "C:\ProgramData\Docker"
+Remove-Item -Recurse -Force "C:\Program Files\Docker"
+Remove-Item -Recurse -Force "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Docker"
+Remove-Item -Force "C:\Users\Public\Desktop\Docker for Windows.lnk"
+Get-ChildItem HKLM:\software\microsoft\windows\currentversion\uninstall | % {Get-ItemProperty $_.PSPath}  | ? { $_.DisplayName -eq "Docker" } | Remove-Item -Recurse -Force
+Get-ChildItem HKLM:\software\classes\installer\products | % {Get-ItemProperty $_.pspath} | ? { $_.ProductName -eq "Docker" } | Remove-Item -Recurse -Force
+Get-Item 'HKLM:\software\Docker Inc.' | Remove-Item -Recurse -Force
+Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\Run -name "Docker for Windows" | Remove-Item -Recurse -Force
+#Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\UFH\SHC | ForEach-Object {Get-ItemProperty $_.PSPath} | Where-Object { $_.ToString().Contains("Docker for Windows.exe") } | Remove-Item -Recurse -Force $_.PSPath
+#Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\UFH\SHC | Where-Object { $(Get-ItemPropertyValue $_) -Contains "Docker" }
+```
+
+找到”powershell“， 选择以管理员运行powershell
+
+然后运行脚本
+
+如果遇到报错(我在执行过程中为遇到)，如下图
+
+![img](https://could-res-1252778021.file.myqcloud.com/img/840769-20180423005548012-470712866.png)
+
+则执行 `set-executionpolicy remotesigned`
 
 
 
