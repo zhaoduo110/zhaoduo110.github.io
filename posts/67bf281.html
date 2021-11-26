@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MySQL时间数据存储 | Yet</title><meta name="description" content="类型 格式 范围 存储空间    YEAR YYYY 1901 ~ 2155 1个字节   DATE YYYY-MM-DD 1000-01-01 ~ 9999-12-31 3个字节   TIME HH:MM:SS -838:59:59.000000 ~ 838:59:59.000000 3个字节   TIMESTAMP YYYY-MM-DD HH:MM:SS 1970-01-01 00:00"><meta name="keywords" content="MySQL,SQL"><meta name="author" content="Mr、 Zhao"><meta name="copyright" content="Mr、 Zhao"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="MySQL时间数据存储"><meta name="twitter:description" content="类型 格式 范围 存储空间    YEAR YYYY 1901 ~ 2155 1个字节   DATE YYYY-MM-DD 1000-01-01 ~ 9999-12-31 3个字节   TIME HH:MM:SS -838:59:59.000000 ~ 838:59:59.000000 3个字节   TIMESTAMP YYYY-MM-DD HH:MM:SS 1970-01-01 00:00"><meta name="twitter:image" content="https://could-res-1252778021.file.myqcloud.com/img/20211102193152.jpg"><meta property="og:type" content="article"><meta property="og:title" content="MySQL时间数据存储"><meta property="og:url" content="https://zhaoduo110.github.io/posts/67bf281.html"><meta property="og:site_name" content="Yet"><meta property="og:description" content="类型 格式 范围 存储空间    YEAR YYYY 1901 ~ 2155 1个字节   DATE YYYY-MM-DD 1000-01-01 ~ 9999-12-31 3个字节   TIME HH:MM:SS -838:59:59.000000 ~ 838:59:59.000000 3个字节   TIMESTAMP YYYY-MM-DD HH:MM:SS 1970-01-01 00:00"><meta property="og:image" content="https://could-res-1252778021.file.myqcloud.com/img/20211102193152.jpg"><meta property="article:published_time" content="2021-11-02T10:06:08.000Z"><meta property="article:modified_time" content="2021-11-03T07:08:43.895Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhaoduo110.github.io/posts/67bf281.html"><link rel="prev" title="0o0o0o0o~Writer~0o0o0o" href="https://zhaoduo110.github.io/posts/f61a5fc8.html"><link rel="next" title="Fiddler抓包" href="https://zhaoduo110.github.io/posts/f73eaef5.html"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":1,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">69</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">29</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#YEAR"><span class="toc-number">1.</span> <span class="toc-text">YEAR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DATE"><span class="toc-number">2.</span> <span class="toc-text">DATE</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TIME"><span class="toc-number">3.</span> <span class="toc-text">TIME</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DATETIME"><span class="toc-number">4.</span> <span class="toc-text">DATETIME</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TIMESTAMP"><span class="toc-number">5.</span> <span class="toc-text">TIMESTAMP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DATETIME-VS-TIMESTAMP"><span class="toc-number">6.</span> <span class="toc-text">DATETIME VS TIMESTAMP</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://could-res-1252778021.file.myqcloud.com/img/20211102193152.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Yet</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">MySQL时间数据存储</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-11-02 18:06:08"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2021-11-02</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-11-03 15:08:43"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-11-03</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SQL/">SQL</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>格式</th>
+<th>范围</th>
+<th>存储空间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YEAR</td>
+<td>YYYY</td>
+<td>1901 ~ 2155</td>
+<td>1个字节</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>YYYY-MM-DD</td>
+<td>1000-01-01 ~ 9999-12-31</td>
+<td>3个字节</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>HH:MM:SS</td>
+<td>-838:59:59.000000 ~ 838:59:59.000000</td>
+<td>3个字节</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>YYYY-MM-DD HH:MM:SS</td>
+<td>1970-01-01 00:00:01.000000UTC ~ 2038-01-19 03:14:07.999999UTC</td>
+<td>4个字节</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>YYYY-MM-DD HH:MM:SS</td>
+<td>1000-01-01 00:00:00.000000 ~ 9999-12-31 23:59:59.999999</td>
+<td>8个字节</td>
+</tr>
+</tbody></table>
+<p><code>MySQL允许对TIME、DATETIME和TIMESTAMP类型值使用小数秒，精度最高可达微秒(6位)。要定义包含小数秒部分的列，使用语法type_name(fsp)，其中type_name是TIME、DATETIME或TIMESTAMP，而fsp是小数秒精度</code></p>
+<p>时间类型MySQL支持的所有文字表述方式：<a href="https://dev.mysql.com/doc/refman/8.0/en/date-and-time-literals.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/8.0/en/date-and-time-literals.html</a></p>
+<h1 id="YEAR"><a href="#YEAR" class="headerlink" title="YEAR"></a>YEAR</h1><p>年份类型。只保存年份，占用空间小</p>
+<p><strong>创建表</strong></p>
+<ul>
+<li>类型支持：year 与 year(4)，注意无year(2)的定义方式</li>
+<li>值的有效范围：1901 至 2155</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE test_year (</span><br><span class="line">	&#96;test_year&#96; YEAR NOT NULL DEFAULT 0 COMMENT &#39;年份类型&#39;</span><br><span class="line">) ENGINE&#x3D;INNODB CHARSET&#x3D;utf8;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>插入值</strong></p>
+<ol>
+<li><p>支持整数和字符串，支持 2位数 或者 4位数</p>
+<p><code>需要注意的是：数字0显示的是0，字符串&#39;0&#39;显示的是2000</code></p>
+<ul>
+<li><p>2位数</p>
+<p>00~69 将转换为2000 ~ 2069之间</p>
+<p>70~99 将转换为1970 ~ 1999之间</p>
+</li>
+<li><p>4位数</p>
+<p>就是正常的年份，比如1990、2021</p>
+</li>
+</ul>
+</li>
+<li><p>插入当前年份。year(now()) 或者 year(curdate())</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO test_year (&#96;test_year&#96;) VALUE (year(now()));</span><br><span class="line">INSERT INTO test_year (&#96;test_year&#96;) VALUE (year(curdate()))</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h1 id="DATE"><a href="#DATE" class="headerlink" title="DATE"></a>DATE</h1><p>日期类型。</p>
+<p><strong>创建表</strong></p>
+<p>默认值没找到一个好的正确的设置方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE test_date (</span><br><span class="line">	&#96;test_date&#96; DATE NOT NULL COMMENT &#39;日期类型&#39;</span><br><span class="line">) ENGINE&#x3D;INNODB CHARSET&#x3D;utf8</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>插入值</strong></p>
+<ul>
+<li><p><code>如果插入值的年份部分为2位数，则依然遵循year类型的规则</code></p>
+</li>
+<li><p>不支持只插入年月，或只插入月日等，必须是年月日都有</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO test_date (&#96;test_date&#96;) VALUE (&#39;00-11-22&#39;);</span><br><span class="line">INSERT INTO test_date (&#96;test_date&#96;) VALUE (&#39;10-11-22&#39;);</span><br><span class="line">INSERT INTO test_date (&#96;test_date&#96;) VALUE (&#39;1950-11-22&#39;);</span><br><span class="line">INSERT INTO test_date (&#96;test_date&#96;) VALUE (DATE(now()));</span><br><span class="line">INSERT INTO test_date (&#96;test_date&#96;) VALUE (DATE(curdate()));</span><br><span class="line"></span><br><span class="line">&gt; select * from test_date;</span><br><span class="line">test_date</span><br><span class="line">2000-11-22</span><br><span class="line">2010-11-22</span><br><span class="line">1950-11-22</span><br><span class="line">2021-11-03</span><br><span class="line">2021-11-03</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="TIME"><a href="#TIME" class="headerlink" title="TIME"></a>TIME</h1><p>时间类型</p>
+<p><strong>声明方式</strong></p>
+<blockquote>
+<p>filed_name TIME[(fsp)] [NOT NULL DEFAULT …..]</p>
+</blockquote>
+<p>fsp可以给出 0 到 6 范围内 的可选值来指定小数秒精度。值 0 表示没有小数部分。如果省略，则默认精度为 0</p>
+<p><strong>创建表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE test_time (</span><br><span class="line">	&#96;test_time&#96; TIME NOT NULL DEFAULT 0 COMMENT &#39;日期类型&#39;</span><br><span class="line">) ENGINE&#x3D;INNODB CHARSET&#x3D;utf8</span><br></pre></td></tr></table></figure>
+
+<p><strong>插入值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO test_time (&#96;test_time&#96;) VALUE (&#39;25:10:10&#39;);</span><br><span class="line">INSERT INTO test_time (&#96;test_time&#96;) VALUE (TIME(now()));</span><br><span class="line">INSERT INTO test_time (&#96;test_time&#96;) VALUE (CURRENT_TIME);</span><br><span class="line">INSERT INTO test_time (&#96;test_time&#96;) VALUE (TIME(CURRENT_TIME));</span><br><span class="line">INSERT INTO test_time (&#96;test_time&#96;) VALUE (CURRENT_TIMESTAMP);</span><br><span class="line">INSERT INTO test_time (&#96;test_time&#96;) VALUE (TIME(CURRENT_TIMESTAMP));</span><br><span class="line"></span><br><span class="line">&gt; SELECT * FROM test_time;</span><br><span class="line">test_time</span><br><span class="line">25:10:10</span><br><span class="line">11:44:00</span><br><span class="line">11:44:00</span><br><span class="line">11:44:00</span><br><span class="line">11:44:00</span><br><span class="line">11:44:00</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="DATETIME"><a href="#DATETIME" class="headerlink" title="DATETIME"></a>DATETIME</h1><p>日期时间类型</p>
+<p><strong>声明方式</strong></p>
+<blockquote>
+<p>filed_name DATETIME[(fsp)] [NOT NULL DEFAULT …..]</p>
+</blockquote>
+<p>fsp可以给出 0 到 6 范围内 的可选值来指定小数秒精度。值 0 表示没有小数部分。如果省略，则默认精度为 0</p>
+<p><strong>创建表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE test_datetime (</span><br><span class="line">	&#96;created_at&#96; DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;日期时间类型&#39;,</span><br><span class="line">    &#96;updated_at&#96; DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT &#39;日期时间类型&#39;</span><br><span class="line">) ENGINE&#x3D;INNODB CHARSET&#x3D;utf8;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>DEFAULT CURRENT_TIMESTAMP 声明默认值为当前时间</p>
+</li>
+<li><p>DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 声明默认值为当前时间并且在行发生修改时该字段值自动更新为当前时间</p>
+</li>
+</ul>
+<p><code>如果要把值默认为NULL，DEFAULT NULL这种方式不好使 要使用以下方式</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE ... (</span><br><span class="line">	...</span><br><span class="line">	&#96;created_at&#96; TIMESTAMP NULL COMMENT &#39;&#39;,</span><br><span class="line">    ...</span><br><span class="line">) ...</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>插入值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO test_datetime (&#96;created_at&#96;) VALUE (&#39;25:10:10&#39;);</span><br><span class="line">INSERT INTO test_datetime (&#96;created_at&#96;) VALUE (&#39;10:10:10&#39;);</span><br><span class="line">INSERT INTO test_datetime (&#96;created_at&#96;) VALUE (&#39;10:10:10 10:10:10&#39;);</span><br><span class="line">INSERT INTO test_datetime (&#96;created_at&#96;) VALUE (CURRENT_DATE);</span><br><span class="line">INSERT INTO test_datetime (&#96;created_at&#96;) VALUE (CURRENT_TIME);</span><br><span class="line">INSERT INTO test_datetime (&#96;created_at&#96;) VALUE (CURRENT_TIMESTAMP);</span><br><span class="line">INSERT INTO test_datetime (&#96;created_at&#96;) VALUE (NOW());</span><br><span class="line"></span><br><span class="line">&gt; SELECT * FROM test_datetime;</span><br><span class="line">created_at updated_at</span><br><span class="line">2025-10-10 00:00:00	2021-11-03 14:18:12</span><br><span class="line">2010-10-10 00:00:00	2021-11-03 14:18:12</span><br><span class="line">2010-10-10 10:10:10	2021-11-03 14:18:12</span><br><span class="line">2021-11-03 00:00:00	2021-11-03 14:18:12</span><br><span class="line">2021-11-03 14:18:12	2021-11-03 14:18:12</span><br><span class="line">2021-11-03 14:18:12	2021-11-03 14:18:12</span><br><span class="line">2021-11-03 14:18:12	2021-11-03 14:18:12</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="TIMESTAMP"><a href="#TIMESTAMP" class="headerlink" title="TIMESTAMP"></a>TIMESTAMP</h1><p>日期时间类型</p>
+<p><strong>声明方式</strong></p>
+<blockquote>
+<p>filed_name TIMESTAMP[(fsp)] [NOT NULL DEFAULT …..]</p>
+</blockquote>
+<p>官方说明：服务器处理 <code>TIMESTAMP</code> 定义的方式取决于<a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_explicit_defaults_for_timestamp" target="_blank" rel="noopener"><code>explicit_defaults_for_timestamp</code></a> 系统变量的值</p>
+<ul>
+<li><p>如果 <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_explicit_defaults_for_timestamp" target="_blank" rel="noopener"><code>explicit_defaults_for_timestamp</code></a> 启用，则不会自动将<code>DEFAULT CURRENT_TIMESTAMP</code>或<code>ON UPDATE CURRENT_TIMESTAMP</code>属性分配 给任何 <a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html" target="_blank" rel="noopener"><code>TIMESTAMP</code></a>列。它们必须明确包含在列定义中。此外，任何 <a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html" target="_blank" rel="noopener"><code>TIMESTAMP</code></a>未明确声明为<code>NOT NULL</code>允许 <code>NULL</code>值。</p>
+</li>
+<li><p>如果 <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_explicit_defaults_for_timestamp" target="_blank" rel="noopener"><code>explicit_defaults_for_timestamp</code></a> 禁用，服务器处理<code>TIMESTAMP</code> 如下：</p>
+<ul>
+<li><p>除非另有说明，否则<a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html" target="_blank" rel="noopener"><code>TIMESTAMP</code></a>表中的第一 列被定义为在未明确分配值的情况下自动设置为最近修改的日期和时间。这<a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html" target="_blank" rel="noopener"><code>TIMESTAMP</code></a> 对于记录<a href="https://dev.mysql.com/doc/refman/8.0/en/insert.html" target="_blank" rel="noopener"><code>INSERT</code></a>or <a href="https://dev.mysql.com/doc/refman/8.0/en/update.html" target="_blank" rel="noopener"><code>UPDATE</code></a>操作的时间戳很有用 。您还可以<a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html" target="_blank" rel="noopener"><code>TIMESTAMP</code></a>通过为其分配一个<code>NULL</code>值将任何列设置为当前日期和时间 ，除非它已使用<code>NULL</code>属性定义为允许 <code>NULL</code>值。</p>
+</li>
+<li><p>可以使用<code>DEFAULT CURRENT_TIMESTAMP</code>和<code>ON UPDATE CURRENT_TIMESTAMP</code>列定义子句指定自动初始化和更新到当前日期和时间。默认情况下，第一<a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html" target="_blank" rel="noopener"><code>TIMESTAMP</code></a> 列具有这些属性，如前所述。但是，<a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html" target="_blank" rel="noopener"><code>TIMESTAMP</code></a>表中的任何列都可以定义为具有这些属性。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>创建表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE test_timestamp (</span><br><span class="line">	&#96;created_at&#96; TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;日期时间类型&#39;,</span><br><span class="line">    &#96;updated_at&#96; TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT &#39;日期时间类型&#39;</span><br><span class="line">) ENGINE&#x3D;INNODB CHARSET&#x3D;utf8;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>DEFAULT CURRENT_TIMESTAMP 声明默认值为当前时间</p>
+</li>
+<li><p>DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 声明默认值为当前时间并且在行发生修改时该字段值自动更新为当前时间</p>
+</li>
+</ul>
+<p><code>如果要把值默认为NULL，DEFAULT NULL这种方式不好使 要使用以下方式</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE ... (</span><br><span class="line">	...</span><br><span class="line">	&#96;created_at&#96; TIMESTAMP NULL COMMENT &#39;&#39;,</span><br><span class="line">    ...</span><br><span class="line">) ...</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>插入值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO test_timestamp (&#96;created_at&#96;) VALUE (&#39;25:10:10&#39;);</span><br><span class="line">INSERT INTO test_timestamp (&#96;created_at&#96;) VALUE (&#39;10:10:10&#39;);</span><br><span class="line">INSERT INTO test_timestamp (&#96;created_at&#96;) VALUE (&#39;10:10:10 10:10:10&#39;);</span><br><span class="line">INSERT INTO test_timestamp (&#96;created_at&#96;) VALUE (CURRENT_DATE);</span><br><span class="line">INSERT INTO test_timestamp (&#96;created_at&#96;) VALUE (CURRENT_TIME);</span><br><span class="line">INSERT INTO test_timestamp (&#96;created_at&#96;) VALUE (CURRENT_TIMESTAMP);</span><br><span class="line">INSERT INTO test_timestamp (&#96;created_at&#96;) VALUE (NOW());</span><br><span class="line"></span><br><span class="line">&gt; SELECT * FROM test_timestamp;</span><br><span class="line">created_at updated_at</span><br><span class="line">2025-10-10 00:00:00	2021-11-03 14:19:43</span><br><span class="line">2010-10-10 00:00:00	2021-11-03 14:19:43</span><br><span class="line">2010-10-10 10:10:10	2021-11-03 14:19:43</span><br><span class="line">2021-11-03 00:00:00	2021-11-03 14:19:43</span><br><span class="line">2021-11-03 14:19:43	2021-11-03 14:19:43</span><br><span class="line">2021-11-03 14:19:43	2021-11-03 14:19:43</span><br><span class="line">2021-11-03 14:19:43	2021-11-03 14:19:43</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="DATETIME-VS-TIMESTAMP"><a href="#DATETIME-VS-TIMESTAMP" class="headerlink" title="DATETIME VS TIMESTAMP"></a>DATETIME VS TIMESTAMP</h1><p>关于datetime和timestamp类型列值的自动插入和更新参考官方说明：<a href="https://dev.mysql.com/doc/refman/8.0/en/timestamp-initialization.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/8.0/en/timestamp-initialization.html</a></p>
+<p><strong>两种方式的区别</strong></p>
+<p>第一：取值范围不同</p>
+<p>第二：存储方式的不同</p>
+<ul>
+<li><p>TIMESTAMP的值，以客户端传入的值和其时区统一转换为UTC 进行存储，查询时从 UTC 转换回客户端当前时区以进行检索</p>
+</li>
+<li><p>而DATETIME的值只要在允许的范围内存进去是什么样取出来就是什么样</p>
+</li>
+</ul>
+<p>第三：占用存储空间不同</p>
+<ul>
+<li>TIMESTAMP占用4个字节</li>
+<li>DATETIME占用8个字节</li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Mr、 Zhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zhaoduo110.github.io/posts/67bf281.html">https://zhaoduo110.github.io/posts/67bf281.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zhaoduo110.github.io" target="_blank">Yet</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a><a class="post-meta__tags" href="/tags/SQL/">SQL</a></div><div class="post_share"><div class="social-share" data-image="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/wallhaven-g7d3g7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/f61a5fc8.html"><img class="prev_cover" data-src="https://could-res-1252778021.file.myqcloud.com/img/20211106110432.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">0o0o0o0o~Writer~0o0o0o</div></div></a></div><div class="next-post pull_right"><a href="/posts/f73eaef5.html"><img class="next_cover" data-src="https://could-res-1252778021.file.myqcloud.com/img/Konachan.com-20sample.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Fiddler抓包</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/c84d94b.html" title="MySQL知识梳理-1.SQL与NoSQL"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218831023.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-11</div><div class="relatedPosts_title">MySQL知识梳理-1.SQL与NoSQL</div></div></a></div><div class="relatedPosts_item"><a href="/posts/ea12c5be.html" title="MySQL知识梳理-2.MySQL8.0部署"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218831023.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-11</div><div class="relatedPosts_title">MySQL知识梳理-2.MySQL8.0部署</div></div></a></div><div class="relatedPosts_item"><a href="/posts/cb78f86f.html" title="MySQL知识梳理-3.MySQL配置详解及参数调优"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218831023.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-16</div><div class="relatedPosts_title">MySQL知识梳理-3.MySQL配置详解及参数调优</div></div></a></div><div class="relatedPosts_item"><a href="/posts/e4264951.html" title="MySQL知识梳理-4.MySQL常用的存储引擎 & 数据类型"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218831023.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-18</div><div class="relatedPosts_title">MySQL知识梳理-4.MySQL常用的存储引擎 & 数据类型</div></div></a></div><div class="relatedPosts_item"><a href="/posts/9e341d9c.html" title="MySQL知识梳理-5.SQL语言-DCL"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218831023.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-20</div><div class="relatedPosts_title">MySQL知识梳理-5.SQL语言-DCL</div></div></a></div><div class="relatedPosts_item"><a href="/posts/a00529d2.html" title="MySQL知识梳理-5.SQL语言-DDL"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1618218831023.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-03-23</div><div class="relatedPosts_title">MySQL知识梳理-5.SQL语言-DDL</div></div></a></div></div><div class="clear_both"></div></div></article></main><footer id="footer" style="background-image: url(https://could-res-1252778021.file.myqcloud.com/img/20211102193152.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Mr、 Zhao</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">简</a><i class="darkmode far fa-moon" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>

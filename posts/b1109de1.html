@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Docker命令 | Yet</title><meta name="description" content="Docker命令"><meta name="keywords" content="Docker"><meta name="author" content="Mr、 Zhao"><meta name="copyright" content="Mr、 Zhao"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Docker命令"><meta name="twitter:description" content="Docker命令"><meta name="twitter:image" content="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg"><meta property="og:type" content="article"><meta property="og:title" content="Docker命令"><meta property="og:url" content="https://zhaoduo110.github.io/posts/b1109de1.html"><meta property="og:site_name" content="Yet"><meta property="og:description" content="Docker命令"><meta property="og:image" content="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg"><meta property="article:published_time" content="2021-10-29T10:26:11.000Z"><meta property="article:modified_time" content="2021-10-29T10:31:34.131Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Docker命令 - Container run | Yet</title><meta name="description" content="基本说明docker指令官方文档：https:&#x2F;&#x2F;docs.docker.com&#x2F;reference&#x2F; docker run官方文档：https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;reference&#x2F;commandline&#x2F;container_run&#x2F; 基本语法 1docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]"><meta name="keywords" content="Docker"><meta name="author" content="Mr、 Zhao"><meta name="copyright" content="Mr、 Zhao"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Docker命令 - Container run"><meta name="twitter:description" content="基本说明docker指令官方文档：https:&#x2F;&#x2F;docs.docker.com&#x2F;reference&#x2F; docker run官方文档：https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;reference&#x2F;commandline&#x2F;container_run&#x2F; 基本语法 1docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]"><meta name="twitter:image" content="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg"><meta property="og:type" content="article"><meta property="og:title" content="Docker命令 - Container run"><meta property="og:url" content="https://zhaoduo110.github.io/posts/b1109de1.html"><meta property="og:site_name" content="Yet"><meta property="og:description" content="基本说明docker指令官方文档：https:&#x2F;&#x2F;docs.docker.com&#x2F;reference&#x2F; docker run官方文档：https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;reference&#x2F;commandline&#x2F;container_run&#x2F; 基本语法 1docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]"><meta property="og:image" content="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg"><meta property="article:published_time" content="2021-10-29T10:26:11.000Z"><meta property="article:modified_time" content="2021-11-24T09:01:18.824Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
 var t = Cookies.get("theme")
 if (autoChangeMode == '1'){
   var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -75,7 +75,7 @@ function activateLightMode(){
 }</script><script>var GLOBAL_CONFIG_SITE = { 
   isPost: true,
   isHome: false,
-  isSidebar: false  
+  isSidebar: true  
   }</script><noscript><style>
 #page-header {
   opacity: 1
@@ -83,7 +83,661 @@ function activateLightMode(){
 .justified-gallery img{
   opacity: 1
 }
-</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">54</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">28</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Yet</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Docker命令</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-10-29 18:26:11"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2021-10-29</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-10-29 18:31:34"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-10-29</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Docker/">Docker</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Mr、 Zhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zhaoduo110.github.io/posts/b1109de1.html">https://zhaoduo110.github.io/posts/b1109de1.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zhaoduo110.github.io" target="_blank">Yet</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker/">Docker</a></div><div class="post_share"><div class="social-share" data-image="https://could-res-1252778021.file.myqcloud.com/img/Konachan.com-20sample.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/f73eaef5.html"><img class="prev_cover" data-src="https://could-res-1252778021.file.myqcloud.com/img/Konachan.com-20sample.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Fiddler抓包</div></div></a></div><div class="next-post pull_right"><a href="/posts/1765cf2d.html"><img class="next_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsR1.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PHP常用方法</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/2a40ac23.html" title="Docker安装"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/80cb39dbb6fd526601e80c62ad18972bd5073680.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-10-27</div><div class="relatedPosts_title">Docker安装</div></div></a></div></div><div class="clear_both"></div></div></article></main><footer id="footer" style="background-image: url(https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Mr、 Zhao</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">简</a><i class="darkmode far fa-moon" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">69</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">29</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本说明"><span class="toc-number">1.</span> <span class="toc-text">基本说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指定初始化进程"><span class="toc-number">2.</span> <span class="toc-text">指定初始化进程?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指定自定义的cgroups"><span class="toc-number">3.</span> <span class="toc-text">指定自定义的cgroups?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IMAGE相关"><span class="toc-number">4.</span> <span class="toc-text">IMAGE相关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CONTAINER相关"><span class="toc-number">5.</span> <span class="toc-text">CONTAINER相关</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Yet</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Docker命令 - Container run</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-10-29 18:26:11"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2021-10-29</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-11-24 17:01:18"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-11-24</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Docker/">Docker</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h1><p>docker指令官方文档：<a href="https://docs.docker.com/reference/" target="_blank" rel="noopener">https://docs.docker.com/reference/</a></p>
+<p>docker run官方文档：<a href="https://docs.docker.com/engine/reference/commandline/container_run/" target="_blank" rel="noopener">https://docs.docker.com/engine/reference/commandline/container_run/</a></p>
+<p>基本语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
+
+<p>必须要指定镜像</p>
+<p>OPTIONS</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认</th>
+<th>描述说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–add-host</td>
+<td></td>
+<td>host:ip。添加自定义 host-to-ip 映射</td>
+</tr>
+<tr>
+<td>–attach， -a</td>
+<td></td>
+<td>附加到STDIN、STDOUT或STDERR</td>
+</tr>
+<tr>
+<td>–blkio-weight</td>
+<td></td>
+<td>所有的容器对于 IO 操作「block IO bandwidth – blkio」都拥有相同优先级。<br>可以通过 <code>--blkio-weight</code> 修改容器 blkio 权重，权重值在10和1000之间，或0禁用(默认0)</td>
+</tr>
+<tr>
+<td>–blkio-weight-device</td>
+<td></td>
+<td>指定某个设备的权重大小，如果同时指定 –blkio-weight 则以 –blkio-weight 为全局默认配置，<br>针对指定设备以 –blkio-weight-device 指定设备值为主</td>
+</tr>
+<tr>
+<td>–cap-add</td>
+<td></td>
+<td>添加Linux功能权限（指定某个）</td>
+</tr>
+<tr>
+<td>–cap-drop</td>
+<td></td>
+<td>关闭Linux功能权限（指定某个）</td>
+</tr>
+<tr>
+<td>–cgroup-parent</td>
+<td></td>
+<td>设置用于容器的默认cgroup父级</td>
+</tr>
+<tr>
+<td>–cgroupns</td>
+<td></td>
+<td>API 1.41+ <br>要使用的Cgroup命名空间(host|private)<br>‘host’：在Docker主机的cgroup命名空间中运行容器<br>‘private’：在自己的cgroup命名空间中运行容器<br>‘’：使用cgroup命名空间，由守护进程的default-cgroupns-mode选项配置(默认)</td>
+</tr>
+<tr>
+<td>–cidfile</td>
+<td></td>
+<td>将容器ID写入文件</td>
+</tr>
+<tr>
+<td>–cpu-count</td>
+<td></td>
+<td>CPU核数（仅限windows）</td>
+</tr>
+<tr>
+<td>–cpu-percent</td>
+<td></td>
+<td>CPU百分比（仅限windows）</td>
+</tr>
+<tr>
+<td>–cpu-period</td>
+<td></td>
+<td>限制CPU CFS(完全公平调度程序)周期</td>
+</tr>
+<tr>
+<td>–cpu-quota</td>
+<td></td>
+<td>限制CPU CFS(完全公平调度程序)配额</td>
+</tr>
+<tr>
+<td>–cpu-rt-period</td>
+<td></td>
+<td>API 1.25+<br>限制CPU real-time 周期(以微秒为单位)</td>
+</tr>
+<tr>
+<td>–cpu-rt-runtime</td>
+<td></td>
+<td>API 1.25+<br/>限制CPU real-time 运行时间(以微秒为单位)</td>
+</tr>
+<tr>
+<td>–cpu-shares， -c</td>
+<td></td>
+<td>CPU份额(相对权重)</td>
+</tr>
+<tr>
+<td>–cpus</td>
+<td></td>
+<td>API 1.25+<br/>可获取CPU个数</td>
+</tr>
+<tr>
+<td>–cpuset-cpus</td>
+<td></td>
+<td>允许执行的cpu (0- 3,0,1)</td>
+</tr>
+<tr>
+<td>–cpuset-mems</td>
+<td></td>
+<td>允许执行的内存 (0- 3,0,1)</td>
+</tr>
+<tr>
+<td>–detach，-d</td>
+<td></td>
+<td>在后台运行container并打印容器ID</td>
+</tr>
+<tr>
+<td>–detach-keys</td>
+<td></td>
+<td>重写分离容器的键序列</td>
+</tr>
+<tr>
+<td>–device</td>
+<td></td>
+<td>向容器添加主机设备</td>
+</tr>
+<tr>
+<td>–device-cgroup-rule</td>
+<td></td>
+<td>在cgroup允许的设备列表中添加一条规则</td>
+</tr>
+<tr>
+<td>–device-read-bps</td>
+<td></td>
+<td>限制从设备读取速率(bytes / s)</td>
+</tr>
+<tr>
+<td>–device-read-iops</td>
+<td></td>
+<td>限制设备的读速率(IO / s)</td>
+</tr>
+<tr>
+<td>–device-write-bps</td>
+<td></td>
+<td>限制设备的写入速率(bytes / s)</td>
+</tr>
+<tr>
+<td>–device-write-iops</td>
+<td></td>
+<td>限制设备的写速率(IO / s)</td>
+</tr>
+<tr>
+<td>–disable-content-trust</td>
+<td>true</td>
+<td>跳过image验证</td>
+</tr>
+<tr>
+<td>–dns</td>
+<td></td>
+<td>设置容器的dns服务器</td>
+</tr>
+<tr>
+<td>–dns-opt</td>
+<td></td>
+<td>设置DNS选项</td>
+</tr>
+<tr>
+<td>–dns-option</td>
+<td></td>
+<td>设置DNS选项</td>
+</tr>
+<tr>
+<td>–dns-search</td>
+<td></td>
+<td>指定容器DNS搜索域名</td>
+</tr>
+<tr>
+<td>–domainname</td>
+<td></td>
+<td>容器NIS域名</td>
+</tr>
+<tr>
+<td>–entrypoint</td>
+<td></td>
+<td>覆盖镜像默认的ENTRYPOINT</td>
+</tr>
+<tr>
+<td>–env，-e</td>
+<td></td>
+<td>设置一个环境变量</td>
+</tr>
+<tr>
+<td>–env-file</td>
+<td></td>
+<td>读入包含环境变量的文件</td>
+</tr>
+<tr>
+<td>–expose</td>
+<td></td>
+<td>公开端口或端口范围</td>
+</tr>
+<tr>
+<td>–gpus</td>
+<td></td>
+<td>API 1.40+<br>要添加到容器中的GPU设备<br>‘all’ ：以通过所有GPU</td>
+</tr>
+<tr>
+<td>–group-add</td>
+<td></td>
+<td>添加要加入的附加组</td>
+</tr>
+<tr>
+<td>–health-cmd</td>
+<td></td>
+<td>用于检查健康状态的命令</td>
+</tr>
+<tr>
+<td>–health-interval</td>
+<td></td>
+<td>运行检查健康状态命令的时间间隔(ms | s | m| h) （default 0s）</td>
+</tr>
+<tr>
+<td>–health-retries</td>
+<td></td>
+<td>报告不正常状态的连续失败次数</td>
+</tr>
+<tr>
+<td>–health-start-period</td>
+<td></td>
+<td>API 1.29+<br>容器初始运行情况的启动周期。<br>意思大概是设置了这个时间，容器启动时在这个时间后开始 health-retries</td>
+</tr>
+<tr>
+<td>–health-timeout</td>
+<td></td>
+<td>一次检查运行的最长时间(ms | s | m | h) （default 0s）</td>
+</tr>
+<tr>
+<td>–help</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>–hostname，-h</td>
+<td></td>
+<td>设置容器的hostname</td>
+</tr>
+<tr>
+<td>–init</td>
+<td></td>
+<td>API 1.25+<br>在容器中运行一个init来转发信号和获取进程</td>
+</tr>
+<tr>
+<td>–interactive，-i</td>
+<td></td>
+<td>即使没有连接，也保持STDIN打开</td>
+</tr>
+<tr>
+<td>–io-maxbandwidth</td>
+<td></td>
+<td>系统驱动器的最大IO带宽限制(仅限Windows)</td>
+</tr>
+<tr>
+<td>–io-maxiops</td>
+<td></td>
+<td>系统驱动器的最大IOps限制(仅限Windows)</td>
+</tr>
+<tr>
+<td>–ip</td>
+<td></td>
+<td>IPv4地址(如172.30.100.104)</td>
+</tr>
+<tr>
+<td>–ip6</td>
+<td></td>
+<td>IPv6 地址 (如 2001:db8::33)</td>
+</tr>
+<tr>
+<td>–ipc</td>
+<td></td>
+<td>使用IPC模式</td>
+</tr>
+<tr>
+<td>–isolation</td>
+<td></td>
+<td>容器隔离技术</td>
+</tr>
+<tr>
+<td>–kernel-memory</td>
+<td></td>
+<td>内核内存限制</td>
+</tr>
+<tr>
+<td>–label，-l</td>
+<td></td>
+<td>设置容器上的元数据</td>
+</tr>
+<tr>
+<td>–label-file</td>
+<td></td>
+<td>读入以行分隔的标签文件</td>
+</tr>
+<tr>
+<td>–link</td>
+<td></td>
+<td>添加到另一个容器的链接</td>
+</tr>
+<tr>
+<td>–link-local-ip</td>
+<td></td>
+<td>容器IPv4/IPv6链路本地地址</td>
+</tr>
+<tr>
+<td>–log-driver</td>
+<td></td>
+<td>容器的日志驱动程序</td>
+</tr>
+<tr>
+<td>–log-opt</td>
+<td></td>
+<td>日志驱动器选项</td>
+</tr>
+<tr>
+<td>–mac-address</td>
+<td></td>
+<td>容器MAC地址(例如，92:d0:c6:0a:29:33)</td>
+</tr>
+<tr>
+<td>–memory，-m</td>
+<td></td>
+<td>内存限制</td>
+</tr>
+<tr>
+<td>–memory-reservation</td>
+<td></td>
+<td>内存软限制</td>
+</tr>
+<tr>
+<td>–memory-swap</td>
+<td></td>
+<td>交换区限制 = 内存+交换区大小<br>-1 不限制</td>
+</tr>
+<tr>
+<td>–memory-swappiness</td>
+<td>-1</td>
+<td>调整容器虚拟运行内存(0到100)</td>
+</tr>
+<tr>
+<td>–mount</td>
+<td></td>
+<td>将文件系统挂载到容器</td>
+</tr>
+<tr>
+<td>–name</td>
+<td></td>
+<td>为容器指定一个名称</td>
+</tr>
+<tr>
+<td>–net，–network</td>
+<td></td>
+<td>指定容器连接的网络 ，建议使用–network，最新更新的<br>官方解释–network是更好的，但是–net也不会删除</td>
+</tr>
+<tr>
+<td>–net-alias，–network-alias</td>
+<td></td>
+<td>为容器添加网络别名，建议使用–network-alias</td>
+</tr>
+<tr>
+<td>–no-healthcheck</td>
+<td></td>
+<td>禁用任何容器指定的HEALTHCHECK</td>
+</tr>
+<tr>
+<td>–oom-kill-disable</td>
+<td></td>
+<td>禁用OOM Killer</td>
+</tr>
+<tr>
+<td>–oom-score-adj</td>
+<td></td>
+<td>优化主机的OOM参数(-1000到1000)</td>
+</tr>
+<tr>
+<td>–pid</td>
+<td></td>
+<td>要使用的PID命名空间</td>
+</tr>
+<tr>
+<td>–pids-limit</td>
+<td></td>
+<td>调整容器pid限制(设置-1为无限)</td>
+</tr>
+<tr>
+<td>–platform</td>
+<td></td>
+<td>API 1.32+<br>如果服务器支持多平台，则设置平台</td>
+</tr>
+<tr>
+<td>–privileged</td>
+<td></td>
+<td>将扩展权限授予该容器</td>
+</tr>
+<tr>
+<td>–publish，-p</td>
+<td></td>
+<td>主机端口与容器端口映射（主机端口:容器端口）</td>
+</tr>
+<tr>
+<td>–publish-all，-P</td>
+<td></td>
+<td>将容器暴露所有的端口映射给主机随机端口</td>
+</tr>
+<tr>
+<td>–pull</td>
+<td>missing</td>
+<td>在容器运行之前拉取镜像(“always”|”missing” | “never”)</td>
+</tr>
+<tr>
+<td>–read-only</td>
+<td>no</td>
+<td>将容器的根文件系统挂载为只读</td>
+</tr>
+<tr>
+<td>–restart</td>
+<td></td>
+<td>在容器退出时应用重新启动策略</td>
+</tr>
+<tr>
+<td>–rm</td>
+<td></td>
+<td>当容器退出时自动删除容器，删除时未指定名称的挂载卷也会被删除，指定了名称的不会删除</td>
+</tr>
+<tr>
+<td>–runtime</td>
+<td></td>
+<td>容器运行时</td>
+</tr>
+<tr>
+<td>–security-opt</td>
+<td></td>
+<td>安全设置</td>
+</tr>
+<tr>
+<td>–shm-size</td>
+<td></td>
+<td>/dev/shm的大小</td>
+</tr>
+<tr>
+<td>–sig-proxy</td>
+<td>true</td>
+<td>为进程代理接收信号</td>
+</tr>
+<tr>
+<td>–stop-signal</td>
+<td>SIGTERM</td>
+<td>停止容器的信号</td>
+</tr>
+<tr>
+<td>–stop-timeout</td>
+<td></td>
+<td>API 1.25+<br>停止容器的超时时间(以秒为单位)</td>
+</tr>
+<tr>
+<td>–storage-opt</td>
+<td></td>
+<td>容器的存储驱动程序选项</td>
+</tr>
+<tr>
+<td>–sysctl</td>
+<td></td>
+<td>Sysctl选项</td>
+</tr>
+<tr>
+<td>–tmpfs</td>
+<td></td>
+<td>挂载tmpfs目录</td>
+</tr>
+<tr>
+<td>–tty，-t</td>
+<td></td>
+<td>分配一个pseudo-TTY</td>
+</tr>
+<tr>
+<td>–ulimit</td>
+<td></td>
+<td>Ulimit选项</td>
+</tr>
+<tr>
+<td>–user，-u</td>
+<td></td>
+<td>用户名或UID（&lt;name|uid&gt;[:&lt;group|gid&gt;]）</td>
+</tr>
+<tr>
+<td>–userns</td>
+<td></td>
+<td>要使用的用户命名空间</td>
+</tr>
+<tr>
+<td>–uts</td>
+<td></td>
+<td>要使用的UTS 命名空间</td>
+</tr>
+<tr>
+<td>–volume，-v</td>
+<td></td>
+<td>绑定挂载卷</td>
+</tr>
+<tr>
+<td>–volume-driver</td>
+<td></td>
+<td>容器的可选卷驱动程序</td>
+</tr>
+<tr>
+<td>–volumes-from</td>
+<td></td>
+<td>从指定容器装入卷</td>
+</tr>
+<tr>
+<td>–workdir，-w</td>
+<td></td>
+<td>容器内的工作目录</td>
+</tr>
+</tbody></table>
+<p>里面的很多命令不懂不知道怎么用？ </p>
+<p>没得关系，其实我也不懂，hhhhh~~~        下面会陆续补充各种相关场景的命令使用</p>
+<p>时空之门，当当当当 ~ ~ ~ ~ ~ ~ ~  ~ ~ ~ ~ ~</p>
+<ul>
+<li><a href="/posts/a1e32c5.html" title="Docker命令 - Container run 运行模式">Docker命令 - Container run 运行模式</a></li>
+<li><a href="/posts/db6df65c.html" title="Docker命令 - Container run 标识">Docker命令 - Container run 标识</a></li>
+<li><a href="/posts/65065780.html" title="Docker命令 - Container run 重启策略">Docker命令 - Container run 重启策略</a></li>
+<li><a href="/posts/71fe27df.html" title="Docker命令 - Container run 网络设置">Docker命令 - Container run 网络设置</a></li>
+<li><a href="/posts/4e368c5e.html" title="Docker命令 - Container run 资源限制">Docker命令 - Container run 资源限制</a> - 待完善</li>
+<li><a href="/posts/7c35321e.html" title="Docker命令 - Container run 安全设置">Docker命令 - Container run 安全设置</a> - 待完善
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ul>
+<h1 id="指定初始化进程"><a href="#指定初始化进程" class="headerlink" title="指定初始化进程?"></a>指定初始化进程?</h1><blockquote>
+<p>–init </p>
+</blockquote>
+<h1 id="指定自定义的cgroups"><a href="#指定自定义的cgroups" class="headerlink" title="指定自定义的cgroups?"></a>指定自定义的cgroups?</h1><blockquote>
+<p>–cgroup-parent</p>
+</blockquote>
+<h1 id="IMAGE相关"><a href="#IMAGE相关" class="headerlink" title="IMAGE相关"></a>IMAGE相关</h1><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker image ls</td>
+<td>列出本机的所有 image 文件</td>
+</tr>
+<tr>
+<td>docker image rm [imageName / imageId]</td>
+<td>删除 image 文件</td>
+</tr>
+<tr>
+<td>docker image pull library/hello-world</td>
+<td>拉取仓库镜像到本地</td>
+</tr>
+<tr>
+<td>docker image build -t [username]/[repository]:[tag] .</td>
+<td></td>
+</tr>
+<tr>
+<td>docker image tag [imageName] [username]/[repository]:[tag]</td>
+<td>为本地的 image 标注用户名和版本</td>
+</tr>
+<tr>
+<td>docker image push [username]/[repository]:[tag]</td>
+<td>发布 image 文件</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="CONTAINER相关"><a href="#CONTAINER相关" class="headerlink" title="CONTAINER相关"></a>CONTAINER相关</h1><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker container ls</td>
+<td></td>
+</tr>
+<tr>
+<td>docker container ls –all</td>
+<td>docker container ls -a</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>docker container run</td>
+<td>运行容器（每次运行会生成一个新的container）</td>
+</tr>
+<tr>
+<td>docker container start</td>
+<td>启动已经生成、已经停止运行的容器</td>
+</tr>
+<tr>
+<td>docker container kill [containID]</td>
+<td>终止容器运行（向容器里面的主进程发出 SIGKILL 信号）</td>
+</tr>
+<tr>
+<td>docker container stop</td>
+<td>终止容器运行（向容器里面的主进程发出 SIGTERM 信号，然后过一段时间再发出 SIGKILL 信号）</td>
+</tr>
+<tr>
+<td>docker container rm [containerID]</td>
+<td>删除容器</td>
+</tr>
+<tr>
+<td>docker container logs</td>
+<td>查看 docker 容器的输出，即容器里面 Shell 的标准输出（如果<code>docker run</code>命令运行容器的时候，没有使用<code>-it</code>参数，就要用这个命令查看输出）</td>
+</tr>
+<tr>
+<td>docker container exec</td>
+<td>进入一个正在运行的 docker 容器。（如果<code>docker run</code>命令运行容器的时候，没有使用<code>-it</code>参数，就要用这个命令进入容器）</td>
+</tr>
+<tr>
+<td>docker container cp [containID]:[/path/to/file] .</td>
+<td>从正在运行的 Docker 容器里面，将文件拷贝到本机</td>
+</tr>
+</tbody></table>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Mr、 Zhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zhaoduo110.github.io/posts/b1109de1.html">https://zhaoduo110.github.io/posts/b1109de1.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zhaoduo110.github.io" target="_blank">Yet</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker/">Docker</a></div><div class="post_share"><div class="social-share" data-image="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/wallhaven-g7d3g7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/f73eaef5.html"><img class="prev_cover" data-src="https://could-res-1252778021.file.myqcloud.com/img/Konachan.com-20sample.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Fiddler抓包</div></div></a></div><div class="next-post pull_right"><a href="/posts/1765cf2d.html"><img class="next_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsR1.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PHP常用方法</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/2a40ac23.html" title="Docker安装"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/80cb39dbb6fd526601e80c62ad18972bd5073680.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-10-27</div><div class="relatedPosts_title">Docker安装</div></div></a></div><div class="relatedPosts_item"><a href="/posts/a1e32c5.html" title="Docker命令 - Container run 运行模式"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.file.myqcloud.com/img/20211117171607.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-11-17</div><div class="relatedPosts_title">Docker命令 - Container run 运行模式</div></div></a></div><div class="relatedPosts_item"><a href="/posts/db6df65c.html" title="Docker命令 - Container run 标识"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/img/20211117172402.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-11-17</div><div class="relatedPosts_title">Docker命令 - Container run 标识</div></div></a></div><div class="relatedPosts_item"><a href="/posts/71fe27df.html" title="Docker命令 - Container run 网络设置"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/b1d6a559c5270e828e1049b995fa02bc-1000.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-11-17</div><div class="relatedPosts_title">Docker命令 - Container run 网络设置</div></div></a></div><div class="relatedPosts_item"><a href="/posts/65065780.html" title="Docker命令 - Container run 重启策略"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/357c3f971c6ef56ae6c15d868ceba856.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-11-17</div><div class="relatedPosts_title">Docker命令 - Container run 重启策略</div></div></a></div><div class="relatedPosts_item"><a href="/posts/4e368c5e.html" title="Docker命令 - Container run 资源限制"><img class="relatedPosts_cover" data-src="https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/bd0268b8e42e8d626097359610de5e49-1400.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-11-17</div><div class="relatedPosts_title">Docker命令 - Container run 资源限制</div></div></a></div></div><div class="clear_both"></div></div></article></main><footer id="footer" style="background-image: url(https://could-res-1252778021.cos.ap-shanghai.myqcloud.com/pic/wallpaper/1580638993-thbUPVEsRf.jpeg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Mr、 Zhao</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">简</a><i class="darkmode far fa-moon" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
 POWERMODE.shake = true;
 document.body.addEventListener('input', POWERMODE);
 </script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
