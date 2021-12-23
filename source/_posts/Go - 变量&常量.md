@@ -7,6 +7,8 @@ cover: >-
 tags: Go
 abbrlink: 78736a1c
 date: 2021-10-21 17:48:28
+categories:
+  - Go
 ---
 
 

@@ -7,6 +7,8 @@ cover: >-
 tags: Go
 abbrlink: e4384262
 date: 2021-10-21 18:16:12
+categories:
+  - Go
 ---
 
 **流程控制**

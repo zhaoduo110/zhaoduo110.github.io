@@ -7,6 +7,8 @@ cover: >-
 tags: Go
 abbrlink: 9717c201
 date: 2021-10-21 15:52:55
+categories:
+  - Go
 ---
 
 
@@ -507,5 +509,4 @@ fmt.Printf("值：%v 类型：%T", b, b)
 ==数值类型没法和 bool类型进行转换==
 
 注意：在 go 语言中数值类型没法直接转换成 bool 类型 bool 类型也没法直接转换成数值类型
-
 

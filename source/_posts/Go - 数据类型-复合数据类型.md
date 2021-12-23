@@ -7,6 +7,8 @@ cover: >-
 tags: Go
 abbrlink: 5fc11a3d
 date: 2021-10-21 16:35:45
+categories:
+  - Go
 ---
 
 

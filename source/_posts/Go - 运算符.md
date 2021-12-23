@@ -7,6 +7,8 @@ cover: >-
 tags: Go
 abbrlink: a0839374
 date: 2021-10-21 18:03:23
+categories:
+  - Go
 ---
 
 
